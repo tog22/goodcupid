@@ -3,11 +3,14 @@
 		<div id="menu_bar">
 			<div id="logo_and_title" @click="$router.push('/')">
 				<!-- <img id="logo" src="/images/telescope.png" height="40" width="40" alt="🔭" /> -->
-				<h1 id="app_title">GoodCupid</h1>
+				<div id="app_title">GoodCupid</div>
 			</div>
 			<div id="navbar_links">
 				<router-link to="/browse">
 					Browse
+				</router-link>
+				<router-link to="/message">
+					Message
 				</router-link>
 				<router-link to="/profile">
 					Profile
@@ -119,7 +122,7 @@ header {
 	font-size: 1.6em;
 }
 
-h1#app_title {
+#app_title {
 	font-size: 1.45em;
 	font-weight: 600;
 	margin-right: 2em;

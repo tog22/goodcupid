@@ -1,49 +1,65 @@
 <template>
 	<div id="inner_main">
 		<div id="top_zone">
-			<!-- <div id="profile_picture">
-				<img src="https://via.placeholder.com/150" alt="Profile picture">
-			</div>
-			<div id="profile_name">
-				<h1>
-					{{ store.user.name }}
+			<img id="profile_pic" src="/images/profile_pics/generic_guy.jpg" alt="Profile picture" />
+			<div id="name_etc">
+				<h1 id="name">
+					{{ name }}
 				</h1>
-			</div> -->
+			</div>
 		</div>
-		<div id="profile_text">
-			<section v-if="about_me">
-				<h2>
-					About Me
-				</h2>
-				<div class="section_contents">
-					{{ about_me }}
-				</div>
-			</section>
-		</div>
-		<div id="sidebar">
-			<section id="details">
-				<h2>
-					My details
-				</h2>
-				<div class="section_contents">
-					<div class="row">
-						<div>
-							Age:
+		<div id="lower_zone">
+			<div id="profile_text">
+				<section v-if="about_me">
+					<h2>
+						About Me
+					</h2>
+					<div class="section_contents">
+						{{ about_me }}
+					</div>
+				</section>
+				<section v-if="favourite_media">
+					<h2>
+						Favourite shows, movies, music or books
+					</h2>
+					<div class="section_contents">
+						{{ favourite_media }}
+					</div>
+				</section>
+				<section v-if="message_me_if">
+					<h2>
+						 Message me if
+					</h2>
+					<div class="section_contents">
+						{{ message_me_if }}
+					</div>
+				</section>
+			</div>
+			<div id="sidebar">
+				<section id="details">
+					<h2>
+						My details
+					</h2>
+					<div class="section_contents">
+						<div class="row">
+							<div>
+								Age:
+							</div>
+							<div>
+								{{ age }}
+							</div>
 						</div>
-						<div>
-							{{ age }}
+						<div class="row">
+							<div>
+								Height:
+							</div>
+							<div>
+								{{ height }}
+							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div>
-							Height:
-						</div>
-						<div>
-							{{ height }}
-						</div>
-					</div>
-				</div>
-			</section>
+				</section>
+			</div>
 		</div>
 	</div>
 </template>
@@ -78,6 +94,8 @@ export default defineComponent({
 		return {
 			store: 			
 				store_parent.state,
+			name:
+				dapi.user_profile.name,
 			about_me: 		
 				dapi.user_profile.about_me,
 			age:			

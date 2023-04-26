@@ -56,15 +56,41 @@ header {
 	font-family: 'Poppins', sans-serif;
 }
 
-
 #inner_main {
-	padding-top: 2em;
+	padding-top: 3em;
 	padding-bottom: 4em;
+}
+
+/***************
+**  TOP ZONE  **
+***************/
+
+#top_zone {
+	display: flex;
+	align-items: center;
+	margin-top: 1.5em;
+	margin-bottom: 2em;
+}
+
+#profile_pic {
+	max-height: 180px;
+	margin-right: 1.33em;
+}
+
+h1#name {
+	font-weight: 500;
+}
+
+/*****************
+**  LOWER ZONE  **
+*****************/
+
+#lower_zone {
 	display: flex;
 }
 
 @media screen and (max-width: 767px) {
-	#inner_main {
+	#lower_zone {
 		flex-direction: column;
 	}
 }
@@ -76,6 +102,7 @@ header {
 	}
 }
 
+main h1,
 main h2,
 main h3,
 main h4 {
