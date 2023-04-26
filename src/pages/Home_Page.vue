@@ -1,7 +1,7 @@
 <template>
-	<main>
-		Hello world
-	</main>
+	<div id="inner_main">
+		Home page
+	</div>
 </template>
 
 <script>

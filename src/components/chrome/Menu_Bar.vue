@@ -1,38 +1,37 @@
 <template>
-	<header id="menu_bar">
-		<div id="logo_and_title" @click="$router.push('/')">
-			<!-- <img id="logo" src="/images/telescope.png" height="40" width="40" alt="🔭" /> -->
-			<h1 id="app_title">GoodCupid</h1>
-		</div>
-		<div id="navbar_links">
-			<router-link to="/browse">
-				Browse
-			</router-link>
-			<router-link to="/profile">
-				Profile
-			</router-link>
-			<router-link to="/settings">
-				Settings
-			</router-link>
-			<router-link to="/signout">
-				Sign out
-			</router-link>
-			<!--
-			<div class="menu_container">
-				<div class="menu_icon" @click="is_menu_open = !is_menu_open">
-					☰
-				</div>
-				<div id="menu_position">
-					<div v-if="is_menu_open" id="basic_menu">
-						<p v-for="link in menu_links" :key="link.title" v-bind="link">
-							<a :href="link.url">
-								<span v-html="link.title"> </span>
-							</a>
-						</p>
+	<header>
+		<div id="menu_bar">
+			<div id="logo_and_title" @click="$router.push('/')">
+				<!-- <img id="logo" src="/images/telescope.png" height="40" width="40" alt="🔭" /> -->
+				<h1 id="app_title">GoodCupid</h1>
+			</div>
+			<div id="navbar_links">
+				<router-link to="/browse">
+					Browse
+				</router-link>
+				<router-link to="/profile">
+					Profile
+				</router-link>
+				<router-link to="/settings">
+					Settings
+				</router-link>
+				<!--
+				<div class="menu_container">
+					<div class="menu_icon" @click="is_menu_open = !is_menu_open">
+						☰
+					</div>
+					<div id="menu_position">
+						<div v-if="is_menu_open" id="basic_menu">
+							<p v-for="link in menu_links" :key="link.title" v-bind="link">
+								<a :href="link.url">
+									<span v-html="link.title"> </span>
+								</a>
+							</p>
+						</div>
 					</div>
 				</div>
+				-->
 			</div>
-			-->
 		</div>
 	</header>
 </template>
@@ -83,12 +82,15 @@
 
 <style scoped>
 
+header {
+	background-color: var(--primary);
+}
+
 #menu_bar {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	
-	background-color: var(--primary);
 	color: white;
 	font-weight: bold;
 	padding-top: 0.2em;
