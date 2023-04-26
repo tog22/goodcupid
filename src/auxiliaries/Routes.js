@@ -13,7 +13,22 @@ const router = createRouter({
 			path: '/profile',
 			name: 'profile',
 			component: () => import('../pages/Profile.vue')
-		}
+		},
+		{
+			path: '/browse',
+			name: 'browse',
+			component: () => import('../pages/Browse.vue')
+		},
+		{
+			path: '/message',
+			name: 'message',
+			component: () => import('../pages/Browse.vue')
+		},
+		{
+			path: '/settings',
+			name: 'settings',
+			component: () => import('../pages/Browse.vue')
+		},
 	]
 })
 

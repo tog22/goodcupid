@@ -1,7 +1,7 @@
 <template>
 	<div id="inner_main">
 		<div id="top_zone">
-			<img id="profile_pic" src="/images/profile_pics/generic_guy.jpg" alt="Profile picture" />
+			<img id="profile_pic" :src="'/images/profile_pics/'+pic" alt="Profile picture" />
 			<div id="name_etc">
 				<h1 id="name">
 					{{ name }}
@@ -96,6 +96,8 @@ export default defineComponent({
 				store_parent.state,
 			name:
 				dapi.user_profile.name,
+			pic:
+				dapi.user_profile.pics[0],
 			about_me: 		
 				dapi.user_profile.about_me,
 			age:			
