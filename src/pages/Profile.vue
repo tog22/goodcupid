@@ -91,32 +91,60 @@ export default defineComponent({
 		*******************/
 		let store_parent = inject("store")
 
-		let id
 		if (typeof(this.$route.params.id) == "undefined") {
-			id = dapi.user_profile.pid
+			
+			return {
+				store: 			
+					store_parent.state,
+				name:
+					dapi.user_profile.name,
+				id:
+					dapi.user_profile.pid,
+				pic:
+					dapi.user_profile.pics[0],
+				about_me: 		
+					dapi.user_profile.about_me,
+				age:			
+					dapi.user_profile.age,
+				height:
+					dapi.user_profile.height,
+				favourite_media: 
+					dapi.user_profile.favourite_media,
+				message_me_if:
+					dapi.user_profile.message_me_if,
+
+			}
+
 		} else {
-			id = this.$route.params.id
+			
+			let id = this.$route.params.id
+			let profile = dapi.profiles.find(p => p.pid == id)
+
+			return {
+				store: 			
+					store_parent.state,
+				name:
+					profile.name,
+				id:
+					profile.pid,
+				pic:
+					profile.pics[0],
+				about_me: 		
+					profile.about_me,
+				age:			
+					profile.age,
+				height:
+					profile.height,
+				favourite_media: 
+					profile.favourite_media,
+				message_me_if:
+					profile.message_me_if,
+
+			}
+
 		}
 
-		return {
-			store: 			
-				store_parent.state,
-			name:
-				dapi.user_profile.name,
-			pic:
-				dapi.user_profile.pics[0],
-			about_me: 		
-				dapi.user_profile.about_me,
-			age:			
-				dapi.user_profile.age,
-			height:
-				dapi.user_profile.height,
-			favourite_media: 
-				dapi.user_profile.favourite_media,
-			message_me_if:
-				dapi.user_profile.message_me_if,
-
-		}
+		
 
 	}
 })

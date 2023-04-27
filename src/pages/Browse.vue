@@ -1,7 +1,7 @@
 <template>
 	<div id="inner_main">
 		<div class="grid">
-			<div class="profile" v-for="p in profiles">
+			<div class="profile" v-for="p in profiles" @click="goto(p.pid)">
 				<img class="pic" :src="'/images/profile_pics/'+p.pics[0]" alt="Profile picture" />
 				<div class="name">
 					{{ p.name }}
@@ -30,6 +30,11 @@ import dapi from '@/auxiliaries/Dummy_Server'
 export default defineComponent({
 	name: 'Browse',
 	components: {
+	},
+	methods: {
+		goto(id) {
+			this.$router.push("/profile/"+id)
+		}
 	},
 	data() {
 		
@@ -79,6 +84,7 @@ function lo(to_log) {
 	background-color: white;
 	padding: 15px 15px 0px;
 	border-radius: 8px;
+	cursor: pointer;
 }
 
 img.pic {
