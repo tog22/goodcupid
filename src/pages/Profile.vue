@@ -91,6 +91,13 @@ export default defineComponent({
 		*******************/
 		let store_parent = inject("store")
 
+		let id
+		if (typeof(this.$route.params.id) == "undefined") {
+			id = dapi.user_profile.pid
+		} else {
+			id = this.$route.params.id
+		}
+
 		return {
 			store: 			
 				store_parent.state,
