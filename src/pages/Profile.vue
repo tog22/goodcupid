@@ -75,6 +75,7 @@ import { defineComponent, inject } from 'vue'
 // Auxiliaries
 import store from '@/store/Store'
 import dapi from '@/auxiliaries/Dummy_Server'
+import use_user_store from '@/store/User_Store'
 
 /*********************
 **   *️⃣ MAIN CODE   **
@@ -91,27 +92,31 @@ export default defineComponent({
 		*******************/
 		let store_parent = inject("store")
 
+
 		if (typeof(this.$route.params.id) == "undefined") {
 			
+			const user_store = use_user_store()
+			const prof = user_store.user_profile
+
 			return {
 				store: 			
 					store_parent.state,
 				name:
-					dapi.user_profile.name,
+					prof.name, // was dapi.user_profile.name
 				id:
-					dapi.user_profile.pid,
+					prof.pid,
 				pic:
-					dapi.user_profile.pics[0],
+					prof.pics[0],
 				about_me: 		
-					dapi.user_profile.about_me,
+					prof.about_me,
 				age:			
-					dapi.user_profile.age,
+					prof.age,
 				height:
-					dapi.user_profile.height,
+					prof.height,
 				favourite_media: 
-					dapi.user_profile.favourite_media,
+					prof.favourite_media,
 				message_me_if:
-					dapi.user_profile.message_me_if,
+					prof.message_me_if,
 
 			}
 
