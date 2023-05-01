@@ -1,9 +1,9 @@
 <template>
-	<div id="inner_main">
+	<div id="edit" class="inner_main">
 		<h1 id="page_title">
 			Your profile
 		</h1>
-		<form @submit="on_submit">
+		<form @submit="on_submit" class="form1">
 			<div class="basic_details">
 				<div class="s_item">
 					<label for="name">
@@ -59,3 +59,11 @@ export default defineComponent({
 	}
 })
 </script>
+
+<style>
+
+.basic_details {
+	display: table;
+}
+
+</style>

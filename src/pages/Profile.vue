@@ -1,5 +1,5 @@
 <template>
-	<div id="inner_main" class="profile_page">
+	<div id="profile_page" class="inner_main">
 		<div v-if="!loaded">
 			Loading...
 		</div>

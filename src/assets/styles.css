@@ -37,7 +37,7 @@ a:visited {
 }
 
 #menu_bar,
-#inner_main {
+.inner_main {
 	padding-left: 32px;
 	padding-right: 32px;
 	margin-left: auto;
@@ -47,7 +47,7 @@ a:visited {
 
 @media screen and (hover:none) and (max-width: 767px) {
 	#menu_bar,
-	#inner_main {
+	.inner_main {
 		padding-left: 16px;
 		padding-right: 16px;
 	}
@@ -61,7 +61,7 @@ header {
 	font-family: 'Poppins', sans-serif;
 }
 
-#inner_main {
+.inner_main {
 	padding-top: 3em;
 	padding-bottom: 4em;
 }
@@ -72,6 +72,10 @@ header {
 
 h1#page_title {
 	margin: 0 0 1em;
+}
+
+.form1 input[type="submit"] {
+	margin-top: 2em;
 }
 
 /***************
