@@ -20,19 +20,19 @@ const router = createRouter({
 			component: () => import('../pages/Profile.vue')
 		},
 		{
-			path: '/browse',
-			name: 'browse',
-			component: () => import('../pages/Browse.vue')
+			path: '/search',
+			name: 'search',
+			component: () => import('../pages/Search.vue')
 		},
 		{
 			path: '/message',
 			name: 'message',
-			component: () => import('../pages/Browse.vue')
+			component: () => import('../pages/Search.vue')
 		},
 		{
 			path: '/settings',
 			name: 'settings',
-			component: () => import('../pages/Browse.vue')
+			component: () => import('../pages/Search.vue')
 		},
 	]
 })

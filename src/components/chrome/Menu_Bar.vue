@@ -6,8 +6,8 @@
 				<div id="app_title">GoodCupid</div>
 			</div>
 			<div id="navbar_links">
-				<router-link to="/browse">
-					Browse
+				<router-link to="/search">
+					Search
 				</router-link>
 				<router-link to="/message">
 					Message
