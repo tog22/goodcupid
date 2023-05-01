@@ -1,7 +1,12 @@
 <template>
 	<div id="inner_main">
 		<div class="grid">
-			<div class="profile" v-for="p in profiles" @click="goto(p.pid)">
+			<div 
+				class="profile"
+				v-for="p in profiles"
+				:key="'p'+p.pid" 
+				@click="goto(p.pid)"
+			>
 				<img class="pic" :src="'/images/profile_pics/'+p.pics[0]" alt="Profile picture" />
 				<div class="name">
 					{{ p.name }}
@@ -20,8 +25,7 @@
 import { defineComponent, inject } from 'vue'
 
 // Auxiliaries
-import store from '@/store/Store'
-import dapi from '@/auxiliaries/Dummy_Server'
+import api from '@/auxiliaries/api'
 
 /*********************
 **   *️⃣ MAIN CODE   **
@@ -30,6 +34,21 @@ import dapi from '@/auxiliaries/Dummy_Server'
 export default defineComponent({
 	name: 'Browse',
 	components: {
+	},
+	created() {
+
+		this.profiles = []
+		if (Object.keys(this.$route.params).length === 0) {
+			const get_url = '/records/profiles/'
+			api.get(get_url).then((response) => {
+				for (const profile_found of response.records ) {
+					profile_found.pics = JSON.parse(profile_found.pics)
+					profile_found.pic = profile_found.pics[0]
+					this.profiles.push(profile_found)
+				}
+			})
+		}
+
 	},
 	methods: {
 		goto(id) {
@@ -44,11 +63,8 @@ export default defineComponent({
 		let store_parent = inject("store")
 
 		return {
-			store: 			
-				store_parent.state,
-			profiles:
-				dapi.profiles
-
+			store:			store_parent.state,
+			profiles:		[]
 		}
 
 	}
