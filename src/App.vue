@@ -15,6 +15,7 @@ import { defineComponent, provide } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 
 // Auxiliaries
+import fn from '@/auxiliaries/Functions'
 import store from '@/store/Store'
 
 // Components
@@ -35,6 +36,9 @@ export default defineComponent({
 		*******************/
 		provide('store', store)
 		let store_state = store.state
+
+		fn.login(1)
+
 	}
 })
 

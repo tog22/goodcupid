@@ -1,37 +1,37 @@
 <template>
 	<div id="inner_main">
 		<div id="top_zone">
-			<img id="profile_pic" :src="'/images/profile_pics/'+pic" alt="Profile picture" />
+			<img id="profile_pic" :src="'/images/profile_pics/'+p.pic" alt="Profile picture" />
 			<div id="name_etc">
 				<h1 id="name">
-					{{ name }}
+					{{ p.name }}
 				</h1>
 			</div>
 		</div>
 		<div id="lower_zone">
 			<div id="profile_text">
-				<section v-if="about_me">
+				<section v-if="p.about_me">
 					<h2>
 						About Me
 					</h2>
 					<div class="section_contents">
-						{{ about_me }}
+						{{ p.about_me }}
 					</div>
 				</section>
-				<section v-if="favourite_media">
+				<section v-if="p.favourite_media">
 					<h2>
 						Favourite shows, movies, music or books
 					</h2>
 					<div class="section_contents">
-						{{ favourite_media }}
+						{{ p.favourite_media }}
 					</div>
 				</section>
-				<section v-if="message_me_if">
+				<section v-if="p.message_me_if">
 					<h2>
 						 Message me if
 					</h2>
 					<div class="section_contents">
-						{{ message_me_if }}
+						{{ p.message_me_if }}
 					</div>
 				</section>
 			</div>
@@ -46,7 +46,7 @@
 								Age:
 							</div>
 							<div>
-								{{ age }}
+								{{ p.age }}
 							</div>
 						</div>
 						<div class="row">
@@ -54,7 +54,7 @@
 								Height:
 							</div>
 							<div>
-								{{ height }}
+								{{ p.height }}
 							</div>
 						</div>
 					</div>
@@ -73,8 +73,7 @@
 import { defineComponent, inject } from 'vue'
 
 // Auxiliaries
-import store from '@/store/Store'
-import dapi from '@/auxiliaries/Dummy_Server'
+import api from '@/auxiliaries/api'
 import use_user_store from '@/store/User_Store'
 
 /*********************
@@ -85,71 +84,38 @@ export default defineComponent({
 	name: 'Profile',
 	components: {
 	},
+	created() {
+		
+		// Get data from API
+
+		if (typeof(this.$route.params.id) != "undefined") {
+			let id = this.$route.params.id
+			const get_url = '/records/profiles/'+id
+			api.get(get_url).then((response) => {
+				response.pics = JSON.parse(response.pics)
+				response.pic = response.pics[0]
+				this.p = response
+			})
+		}
+
+
+	},
 	data() {
 		
-		/*******************
-		**  📦 DATA STORE **
-		*******************/
 		let store_parent = inject("store")
-
+		let profile = {a:1}
 
 		if (typeof(this.$route.params.id) == "undefined") {
 			
 			const user_store = use_user_store()
-			const prof = user_store.user_profile
-
-			return {
-				store: 			
-					store_parent.state,
-				name:
-					prof.name, // was dapi.user_profile.name
-				id:
-					prof.pid,
-				pic:
-					prof.pics[0],
-				about_me: 		
-					prof.about_me,
-				age:			
-					prof.age,
-				height:
-					prof.height,
-				favourite_media: 
-					prof.favourite_media,
-				message_me_if:
-					prof.message_me_if,
-
-			}
-
-		} else {
-			
-			let id = this.$route.params.id
-			let profile = dapi.profiles.find(p => p.pid == id)
-
-			return {
-				store: 			
-					store_parent.state,
-				name:
-					profile.name,
-				id:
-					profile.pid,
-				pic:
-					profile.pics[0],
-				about_me: 		
-					profile.about_me,
-				age:			
-					profile.age,
-				height:
-					profile.height,
-				favourite_media: 
-					profile.favourite_media,
-				message_me_if:
-					profile.message_me_if,
-
-			}
+			profile = user_store.user_profile
 
 		}
 
-		
+		return {
+			store: 		store_parent.state,
+			p: 			profile
+		}
 
 	}
 })
