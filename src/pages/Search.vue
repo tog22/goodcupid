@@ -1,5 +1,8 @@
 <template>
 	<div id="inner_main">
+		<div id="search">
+			
+		</div>
 		<div class="grid">
 			<div 
 				class="profile"

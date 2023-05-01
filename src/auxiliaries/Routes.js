@@ -20,6 +20,11 @@ const router = createRouter({
 			component: () => import('../pages/Profile.vue')
 		},
 		{
+			path: '/edit',
+			name: 'edit',
+			component: () => import('../pages/Edit.vue')
+		},
+		{
 			path: '/search',
 			name: 'search',
 			component: () => import('../pages/Search.vue')
@@ -32,7 +37,7 @@ const router = createRouter({
 		{
 			path: '/settings',
 			name: 'settings',
-			component: () => import('../pages/Search.vue')
+			component: () => import('../pages/Settings.vue')
 		},
 	]
 })

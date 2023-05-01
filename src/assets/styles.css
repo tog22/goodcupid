@@ -31,6 +31,11 @@ body {
 	box-sizing: border-box;
 }
 
+a,
+a:visited {
+	color: rgb(0,0,238);
+}
+
 #menu_bar,
 #inner_main {
 	padding-left: 32px;
@@ -61,6 +66,14 @@ header {
 	padding-bottom: 4em;
 }
 
+/**************
+**  GENERAL  **
+**************/
+
+h1#page_title {
+	margin: 0 0 1em;
+}
+
 /***************
 **  TOP ZONE  **
 ***************/
@@ -75,10 +88,6 @@ header {
 #profile_pic {
 	max-height: 180px;
 	margin-right: 1.33em;
-}
-
-h1#name {
-	font-weight: 500;
 }
 
 /*****************

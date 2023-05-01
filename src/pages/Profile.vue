@@ -1,37 +1,54 @@
 <template>
-	<div id="inner_main">
-		<div id="top_zone">
-			<img id="profile_pic" :src="'/images/profile_pics/'+p.pic" alt="Profile picture" />
-			<div id="name_etc">
-				<h1 id="name">
-					{{ p.name }}
-				</h1>
+	<div id="inner_main" class="profile_page">
+		<div v-if="!loaded">
+			Loading...
+		</div>
+		<div id="top_zone" v-if="loaded">
+			<img v-if="pic" id="profile_pic" :src="'/images/profile_pics/'+pic" alt="Profile picture" />
+			<div class="s_right">
+				<div class="s_top">
+
+				</div>
+				<div class="s_middle">
+					<h1 id="name">
+						{{ name }}
+					</h1>
+				</div>
+				<div class="s_bottom">
+					<div v-if="is_user">
+						<router-link to="/edit">Edit profile</router-link>
+						|
+						<a href="#">
+							Log out
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div id="lower_zone">
+		<div id="lower_zone" v-if="loaded">
 			<div id="profile_text">
-				<section v-if="p.about_me">
+				<section v-if="about_me">
 					<h2>
 						About Me
 					</h2>
 					<div class="section_contents">
-						{{ p.about_me }}
+						{{ about_me }}
 					</div>
 				</section>
-				<section v-if="p.favourite_media">
+				<section v-if="favourite_media">
 					<h2>
 						Favourite shows, movies, music or books
 					</h2>
 					<div class="section_contents">
-						{{ p.favourite_media }}
+						{{ favourite_media }}
 					</div>
 				</section>
-				<section v-if="p.message_me_if">
+				<section v-if="message_me_if">
 					<h2>
 						 Message me if
 					</h2>
 					<div class="section_contents">
-						{{ p.message_me_if }}
+						{{ message_me_if }}
 					</div>
 				</section>
 			</div>
@@ -46,7 +63,7 @@
 								Age:
 							</div>
 							<div>
-								{{ p.age }}
+								{{ age }}
 							</div>
 						</div>
 						<div class="row">
@@ -54,7 +71,7 @@
 								Height:
 							</div>
 							<div>
-								{{ p.height }}
+								{{ height }}
 							</div>
 						</div>
 					</div>
@@ -94,7 +111,10 @@ export default defineComponent({
 			api.get(get_url).then((response) => {
 				response.pics = JSON.parse(response.pics)
 				response.pic = response.pics[0]
-				this.p = response
+				for (let key in response) {
+					this[key] = response[key]
+				}
+				this.loaded = true
 			})
 		}
 
@@ -102,20 +122,19 @@ export default defineComponent({
 	},
 	data() {
 		
-		let store_parent = inject("store")
-		let profile = {a:1}
+		let data = {}
+		data.loaded = false
+		data.is_user = false
+		// data.store = inject("store").state
 
 		if (typeof(this.$route.params.id) == "undefined") {
-			
+			data.is_user = true
 			const user_store = use_user_store()
-			profile = user_store.user_profile
-
+			data = { ...data, ...user_store.user_profile }
+			data.loaded = true
 		}
 
-		return {
-			store: 		store_parent.state,
-			p: 			profile
-		}
+		return data
 
 	}
 })
@@ -129,3 +148,32 @@ function lo(to_log) {
 }
 
 </script>
+
+<style scoped>
+
+#top_zone .s_right {
+	display: flex;
+	flex-direction: column;
+}
+
+#top_zone .s_right .s_top {
+	height: 60px;
+}
+
+#top_zone .s_right .s_middle {
+	height: 60px;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+#top_zone .s_right .s_bottom {
+	height: 60px;
+}
+
+h1#name {
+	font-weight: 500;
+	margin: 0;
+}
+
+</style>
