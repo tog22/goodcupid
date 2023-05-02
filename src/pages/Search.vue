@@ -107,7 +107,7 @@ function lo(to_log) {
 
 #search {
 	background-color: white;
-	padding: 2em;
+	padding: 2em 2em 0.5em 2em;
 	border-radius: 8px;
 	margin-bottom: 2em;
 }
@@ -122,7 +122,7 @@ function lo(to_log) {
 #search .option {
 	padding: 7px 1.5em 7px 1.5em;
 	margin-right: 1.5em;
-	margin-bottom: 2.5em;
+	margin-bottom: 1.5em;
 	display: inline-block;
 	height: 36px;
 	border-radius: 18px;
