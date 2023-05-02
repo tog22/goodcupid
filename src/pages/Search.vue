@@ -1,7 +1,23 @@
 <template>
 	<div class="inner_main">
 		<div id="search">
-			
+			<h2 class="section_title">
+				Show me…
+			</h2>
+			<div class="s_content">
+				<div class="option">
+					Men <span class="s_light">who like women</span>
+				</div>
+				<div class="option">
+					Ages 26 to 34
+				</div>
+				<div class="option">
+					Within 25 miles
+				</div>
+				<div class="option">
+					At least 5'9"
+				</div>
+			</div>
 		</div>
 		<div class="grid">
 			<div 
@@ -30,6 +46,9 @@ import { defineComponent, inject } from 'vue'
 // Auxiliaries
 import api from '@/auxiliaries/api'
 
+// Components
+// import Filter from '../components/Filter.vue'
+
 /*********************
 **   *️⃣ MAIN CODE   **
 *********************/
@@ -37,6 +56,7 @@ import api from '@/auxiliaries/api'
 export default defineComponent({
 	name: 'Browse',
 	components: {
+		// Filter
 	},
 	created() {
 
@@ -84,6 +104,41 @@ function lo(to_log) {
 </script>
 
 <style scoped>
+
+#search {
+	background-color: white;
+	padding: 2em;
+	border-radius: 8px;
+	margin-bottom: 2em;
+}
+
+#search .s_content {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	margin-top: 2em;
+}
+
+#search .option {
+	padding: 7px 1.5em 7px 1.5em;
+	margin-right: 1.5em;
+	margin-bottom: 2.5em;
+	display: inline-block;
+	height: 36px;
+	border-radius: 18px;
+	line-height: 22px;
+	font-weight: bold;
+}
+
+#search .option .s_light {
+	font-weight: normal;
+}
+
+#search .option::after {
+	content: '▾';
+    position: relative;
+    left: 0.5em;
+}
 
 .grid {
 	display: grid;

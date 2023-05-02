@@ -3,17 +3,38 @@
 		<h1 id="page_title">
 			Your profile
 		</h1>
-		<form @submit="on_submit" class="form1">
+		<form @submit="on_submit" class="form1 edit_profile_form">
 			<div class="basic_details">
 				<div class="s_item">
 					<label for="name">
-						Name
+						Name:
 					</label>
 					<input type="text" id="name" name="name" v-model="name" />
 				</div>
 				<div class="s_item">
+					<label for="gender">
+						Gender:
+					</label>
+					<select id="gender" v-model="gender">
+						<option value="">Please select</option>
+						<option value="m">Man</option>
+						<option value="w">Woman</option>
+					</select>
+				</div>
+				<div class="s_item">
+					<label for="looking_for">
+						Looking for:
+					</label>
+					<select id="looking_for" v-model="looking_for">
+						<option value="">Please select</option>
+						<option value="m">Men</option>
+						<option value="w">Women</option>
+						<option value="b">Both</option>
+					</select>
+				</div>
+				<div class="s_item">
 					<label for="age">
-						Age
+						Age:
 					</label>
 					<input type="text" id="name" name="name" v-model="age" />
 				</div>
@@ -62,8 +83,31 @@ export default defineComponent({
 
 <style>
 
+.edit_profile_form
+,
+.edit_profile_form input,
+.edit_profile_form select 
+{
+	font-size: 1.1em;
+}
 .basic_details {
 	display: table;
+}
+
+.basic_details .s_item {
+	display: table-row;
+}
+
+.basic_details label,
+.basic_details input,
+.basic_details select {
+	display: table-cell;
+	padding-right: 1em;
+	margin-bottom: 1em;
+}
+
+.form1 input[type="submit"] {
+	margin-top: 1em;
 }
 
 </style>
