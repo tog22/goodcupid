@@ -15,9 +15,9 @@
 				<router-link to="/profile">
 					Profile
 				</router-link>
-				<router-link to="/settings">
+				<!-- <router-link to="/settings">
 					Settings
-				</router-link>
+				</router-link> -->
 				<!--
 				<div class="menu_container">
 					<div class="menu_icon" @click="is_menu_open = !is_menu_open">
