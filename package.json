@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^1.4.0",
     "pinia": "^2.0.32",
+    "pinia-plugin-persistedstate": "^3.1.0",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },
@@ -44,9 +45,11 @@
       "no-irregular-whitespace": 0,
       "no-redeclare": 0,
       "no-empty": 0,
+      "no-debugger": 0,
       "no-prototype-builtins": 0,
       "vue/no-unused-vars": 0,
       "vue/no-unused-components": 0,
+      "vue/multi-word-component-names": 0,
       "vue/no-parsing-error": [
         2,
         {

@@ -5,9 +5,7 @@
 				Show me…
 			</h2>
 			<div class="s_content">
-				<div class="option">
-					Men <span class="s_light">who like women</span>
-				</div>
+				<Toggle opt="who" />
 				<div class="option">
 					Ages 26 to 34
 				</div>
@@ -47,7 +45,7 @@ import { defineComponent, inject } from 'vue'
 import api from '@/auxiliaries/api'
 
 // Components
-// import Filter from '../components/Filter.vue'
+import Toggle from '../components/Toggle.vue'
 
 /*********************
 **   *️⃣ MAIN CODE   **
@@ -56,7 +54,7 @@ import api from '@/auxiliaries/api'
 export default defineComponent({
 	name: 'Browse',
 	components: {
-		// Filter
+		Toggle
 	},
 	created() {
 
@@ -119,26 +117,7 @@ function lo(to_log) {
 	margin-top: 2em;
 }
 
-#search .option {
-	padding: 7px 1.5em 7px 1.5em;
-	margin-right: 1.5em;
-	margin-bottom: 1.5em;
-	display: inline-block;
-	height: 36px;
-	border-radius: 18px;
-	line-height: 22px;
-	font-weight: bold;
-}
 
-#search .option .s_light {
-	font-weight: normal;
-}
-
-#search .option::after {
-	content: '▾';
-    position: relative;
-    left: 0.5em;
-}
 
 .grid {
 	display: grid;

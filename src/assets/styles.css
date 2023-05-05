@@ -163,7 +163,11 @@ section h2 {
 **  SEARCH PAGE  **
 ******************/
 
-#search .option {
+#search .option .chosen {
 	background-color: var(--blue);
 	color: white;
+}
+
+.option .s_light {
+	font-weight: normal;
 }
