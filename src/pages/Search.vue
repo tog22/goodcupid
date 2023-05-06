@@ -6,15 +6,9 @@
 			</h2>
 			<div class="s_content">
 				<Toggle opt="who" />
-				<div class="option">
-					Ages 26 to 34
-				</div>
-				<div class="option">
-					Within 25 miles
-				</div>
-				<div class="option">
-					At least 5'9"
-				</div>
+				<Toggle opt="age" />
+				<Toggle opt="distance" />
+				<Toggle opt="height" />
 			</div>
 		</div>
 		<div class="grid">

@@ -1,12 +1,17 @@
 <template>
-	<div class="option">
-		<div class="selecter dropdown">
-			<div 
-				v-for="(option, index) in filter.options"
-				:key="'o'+index"
-				@click="text = option.text"
-			>
-				<span v-html="option.text"></span>
+	<div class="option" :id="'o_'+opt">
+		<div class="selecter"  v-if="type == 'dropdown'" >
+			<div v-if="type == 'dropdown'" class="dropdown">
+				<div 
+					v-for="(option, index) in filter.options"
+					:key="'o'+index"
+					@click="text = option.text"
+				>
+					<span v-html="option.text"></span>
+				</div>
+			</div>
+			<div v-else-if="type == 'custom'" class="custom">
+				
 			</div>
 		</div>
 		<div class="chosen">
@@ -24,6 +29,7 @@
 
 // External libraries
 import { defineComponent, inject } from 'vue'
+import $ from 'jquery'
 
 // Auxiliaries
 import filters from '@/auxiliaries/Filters'
@@ -33,6 +39,16 @@ import use_user_store from '@/store/User_Store'
 /*********************
 **   *️⃣ MAIN CODE   **
 *********************/
+
+function resize_selecter(opt) {
+	$(document).ready(function() {
+		let min_width = $('#o_'+opt+' .chosen').width() + 'px';
+		$('o_'+opt+' .selecter').css('min-width', min_width)
+		$('o_'+opt+' .selecter').css('color', 'red')
+		let ff = $('#o_'+opt+' .selecter')
+		debugger
+	})
+}
 
 export default defineComponent({
 	name: 'Toggle',
@@ -44,6 +60,12 @@ export default defineComponent({
 			type: String
 		}
 	},
+	mounted() {
+		resize_selecter(this.opt)
+	},
+	updated() {
+		resize_selecter(this.opt)
+	},
 	methods: {
 		goto(id) {
 			this.$router.push("/profile/"+id)
@@ -53,15 +75,27 @@ export default defineComponent({
 		
 		let store_parent = inject("store")
 		const user_store = use_user_store()
-		const selected = user_store.looking_for[this.opt]
 		const filter = filters[this.opt]
-		console.log(filter.options)
 
-		return {
-			store:			store_parent.state,
-			filter:			filter,
-			text: 			filter.options[selected].text,
-			cross_shown:	false,
+		if (filter.type == 'dropdown') {
+			
+			const selected = user_store.looking_for[this.opt]
+
+			return {
+				store:			store_parent.state,
+				filter:			filter,
+				type: 			filter.type,
+				text: 			filter.options[selected].text,
+				cross_shown:	false,
+			}
+
+		} else if (filter.type == 'custom') {
+			
+			return {
+				type: 			'custom',
+				text: 			filter.placeholder
+			}
+
 		}
 
 	}
