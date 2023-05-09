@@ -8,6 +8,10 @@ const use_user_store = defineStore('gc_user_store', {
 			// user_profile: {}
 			looking_for: {
 				who:			'mlw',
+				age:			{
+					min:	26,
+					max:	34,
+				}
 			}
 		}
 	},

@@ -1,6 +1,9 @@
 <template>
-	<div class="option" :id="'o_'+opt">
-		<div class="selecter"  v-if="type == 'dropdown'" >
+	<div :class="'option '+open" :id="opt">
+		<div class="selecter dropdown"  v-if="type == 'dropdown'" >
+			<div class="close" @click="close_toggle">
+				×
+			</div>
 			<div v-if="type == 'dropdown'" class="dropdown">
 				<div 
 					v-for="(option, index) in filter.options"
@@ -14,10 +17,19 @@
 				
 			</div>
 		</div>
-		<div class="chosen">
+		<div class="selecter" v-if="opt == 'age'">
+			<div class="close" @click="close_toggle">
+				×
+			</div>
+			<div class="s_content">
+				<Age />
+			</div>
+		</div>
+		<div class="chosen" @click="open_toggle">
 			<span v-html="text"></span>
 		</div>
 		<div class="s_below">
+			
 		</div>
 	</div>
 </template>
@@ -35,6 +47,9 @@ import $ from 'jquery'
 import filters from '@/auxiliaries/Filters'
 import use_user_store from '@/store/User_Store'
 
+// Components
+import Age from './Toggles/Age.vue'
+
 
 /*********************
 **   *️⃣ MAIN CODE   **
@@ -43,16 +58,14 @@ import use_user_store from '@/store/User_Store'
 function resize_selecter(opt) {
 	$(document).ready(function() {
 		let min_width = $('#o_'+opt+' .chosen').width() + 'px';
-		$('o_'+opt+' .selecter').css('min-width', min_width)
-		$('o_'+opt+' .selecter').css('color', 'red')
-		let ff = $('#o_'+opt+' .selecter')
-		debugger
+		$('#o_'+opt+' .selecter').css('min-width', min_width)
 	})
 }
 
 export default defineComponent({
 	name: 'Toggle',
 	components: {
+		Age
 	},
 	props: {
 		opt: {
@@ -70,6 +83,20 @@ export default defineComponent({
 		goto(id) {
 			this.$router.push("/profile/"+id)
 		},
+		open_toggle() {
+			if (this.open == 'closed') {
+				this.open = 'open'
+			} else {
+				this.open = 'closed'
+			}
+		},
+		close_toggle() {
+			if (this.open == 'open') {
+				this.open = 'closed'
+			} else {
+				this.open = 'open'
+			}
+		}
 	},
 	data() {
 		
@@ -83,6 +110,7 @@ export default defineComponent({
 
 			return {
 				store:			store_parent.state,
+				open: 			'closed',
 				filter:			filter,
 				type: 			filter.type,
 				text: 			filter.options[selected].text,
@@ -92,6 +120,7 @@ export default defineComponent({
 		} else if (filter.type == 'custom') {
 			
 			return {
+				open: 			'closed',
 				type: 			'custom',
 				text: 			filter.placeholder
 			}
@@ -111,7 +140,7 @@ function lo(to_log) {
 
 </script>
 
-<style scoped>
+<style>
 
 .option {
 	position: relative;
@@ -121,9 +150,17 @@ function lo(to_log) {
 .option .selecter {
 	padding: 7px 1.5em 7px 1.5em;
 	display: inline-block;
-	border-radius: 18px;
 	line-height: 22px;
 	font-weight: bold;
+}
+
+.option .chosen,
+.option .selecter.dropdown {
+	border-radius: 18px;
+}
+
+.option .selecter {
+	border-radius: 10px;
 }
 .option .chosen {
 	margin-right: 1.5em;
@@ -140,11 +177,29 @@ function lo(to_log) {
 	height: 1.5em;
 }
 
+.closed .selecter {
+	display: none;
+}
+
 .selecter {
 	position: absolute;
 	z-index: 1;
+	width: max-content;
+	max-width: 400px;
+
 	background-color: #186BCC; /* light =  #BFE4EF; /*  #508ACC; */
 	color: white;
+	box-sizing: content-box;
 }
+
+.selecter input[type="text"] {
+	border: none;
+}
+
+/***********************
+**  SPECIFIC OPTIONS  **
+***********************/
+
+
 
 </style>

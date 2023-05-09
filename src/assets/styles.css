@@ -171,3 +171,14 @@ section h2 {
 .option .s_light {
 	font-weight: normal;
 }
+
+.selecter .close {
+	float: right;
+    position: relative;
+    left: 14px;
+    top: -8px;
+}
+
+.selecter input {
+	display: inline-block;
+}

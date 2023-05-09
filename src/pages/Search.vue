@@ -147,4 +147,10 @@ img.pic {
 	margin-bottom: 0.15em;
 }
 
+@media screen and (max-width: 660px) {
+	.name {
+		font-size: 1.2em;
+	}
+}
+
 </style>
