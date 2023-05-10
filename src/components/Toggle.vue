@@ -1,5 +1,5 @@
 <template>
-	<div :class="'option '+open" :id="opt">
+	<div :class="'option '+open" :id="'o_'+name">
 		<div class="selecter dropdown"  v-if="type == 'dropdown'" >
 			<div class="close" @click="close_toggle">
 				×
@@ -17,16 +17,16 @@
 				
 			</div>
 		</div>
-		<div class="selecter" v-if="opt == 'age'">
+		<div class="selecter" v-if="name == 'age'">
 			<div class="close" @click="close_toggle">
 				×
 			</div>
 			<div class="s_content">
-				<Age />
+				<component :is="sel" />
 			</div>
 		</div>
 		<div class="chosen" @click="open_toggle">
-			<span v-html="text"></span>
+			<component :is="disp" />
 		</div>
 		<div class="s_below">
 			
@@ -48,36 +48,44 @@ import filters from '@/auxiliaries/Filters'
 import use_user_store from '@/store/User_Store'
 
 // Components
-import Age from './Toggles/Age.vue'
+import AgeS from './Toggles/AgeS.vue'
 
 
 /*********************
 **   *️⃣ MAIN CODE   **
 *********************/
 
-function resize_selecter(opt) {
+function resize_selecter(name) {
 	$(document).ready(function() {
-		let min_width = $('#o_'+opt+' .chosen').width() + 'px';
-		$('#o_'+opt+' .selecter').css('min-width', min_width)
+		let min_width = $('#o_'+name+' .chosen').width() + 'px';
+		$('#o_'+name+' .selecter').css('min-width', min_width)
 	})
 }
 
 export default defineComponent({
 	name: 'Toggle',
 	components: {
-		Age
+		AgeS
 	},
 	props: {
-		opt: {
-			required: true,
-			type: String
+		name: {
+			type: String,
+			required: true
+		},
+		disp: {
+			type: Object,
+			required: true
+		},
+		sel: {
+			type: Object,
+			required: true
 		}
 	},
 	mounted() {
-		resize_selecter(this.opt)
+		resize_selecter(this.name)
 	},
 	updated() {
-		resize_selecter(this.opt)
+		resize_selecter(this.name)
 	},
 	methods: {
 		goto(id) {
@@ -102,11 +110,11 @@ export default defineComponent({
 		
 		let store_parent = inject("store")
 		const user_store = use_user_store()
-		const filter = filters[this.opt]
+		const filter = filters[this.name]
 
 		if (filter.type == 'dropdown') {
 			
-			const selected = user_store.looking_for[this.opt]
+			const selected = user_store.looking_for[this.name]
 
 			return {
 				store:			store_parent.state,

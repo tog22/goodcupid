@@ -5,10 +5,10 @@
 				Show me…
 			</h2>
 			<div class="s_content">
-				<Toggle opt="who" />
-				<Toggle opt="age" />
-				<Toggle opt="distance" />
-				<Toggle opt="height" />
+				<!-- <Toggle name="who" /> -->
+				<Toggle name="age" :disp="Age" :sel="AgeS" />
+				<!-- <Toggle name="distance" />
+				<Toggle name="height" /> -->
 			</div>
 		</div>
 		<div class="grid">
@@ -33,13 +33,15 @@
 *******************/
 
 // External libraries
-import { defineComponent, inject } from 'vue'
+import { defineComponent, inject, markRaw } from 'vue'
 
 // Auxiliaries
 import api from '@/auxiliaries/api'
 
 // Components
 import Toggle from '../components/Toggle.vue'
+import Age from '../components/Toggles/Age.vue'
+import AgeS from '../components/Toggles/AgeS.vue'
 
 /*********************
 **   *️⃣ MAIN CODE   **
@@ -48,7 +50,9 @@ import Toggle from '../components/Toggle.vue'
 export default defineComponent({
 	name: 'Browse',
 	components: {
-		Toggle
+		Toggle,
+		Age,
+		AgeS
 	},
 	created() {
 
@@ -79,7 +83,9 @@ export default defineComponent({
 
 		return {
 			store:			store_parent.state,
-			profiles:		[]
+			profiles:		[],
+			Age: 			markRaw(Age),
+			AgeS: 			markRaw(AgeS)
 		}
 
 	}
