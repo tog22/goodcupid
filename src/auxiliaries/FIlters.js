@@ -1,7 +1,3 @@
-import use_user_store from '@/store/User_Store'
-const user_store = use_user_store()
-const l = user_store.looking_for
-
 const filters = {
 	who: {
 		type: 	'dropdown',
@@ -16,7 +12,7 @@ const filters = {
 	},
 	age: {
 		type: 	'custom',
-		placeholder:	'Ages '+l.age.min+' to 34',
+		placeholder:	'Ages 28 to 34',
 		html: 			'<div class="filter_age"><div class="filter_age_slider"></div></div>'
 	},
 	distance: {

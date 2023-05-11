@@ -15,7 +15,7 @@ import { defineComponent, provide } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 
 // Auxiliaries
-import fn from '@/auxiliaries/Functions'
+import api from '@/auxiliaries/api'
 import store from '@/store/Store'
 
 // Components
@@ -36,9 +36,14 @@ export default defineComponent({
 		*******************/
 		provide('store', store)
 		let store_state = store.state
-
-		fn.login(1)
-
+		
+		// For now, auto-login
+		const get_url = '/records/profiles/1'
+		api.get(get_url).then((response) => {
+			response.pics = JSON.parse(response.pics)
+			response.pic = response.pics[0]
+			store_state.user_profile = response
+		})
 	}
 })
 

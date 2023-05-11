@@ -72,6 +72,10 @@ export default defineComponent({
 	methods: {
 		goto(id) {
 			this.$router.push("/profile/"+id)
+		},
+		do_search() {
+			let loading_profiles = []
+			const get_url = '/records/profiles/'
 		}
 	},
 	data() {

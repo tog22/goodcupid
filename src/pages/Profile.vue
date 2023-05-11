@@ -91,7 +91,6 @@ import { defineComponent, inject } from 'vue'
 
 // Auxiliaries
 import api from '@/auxiliaries/api'
-import use_user_store from '@/store/User_Store'
 
 /*********************
 **   *️⃣ MAIN CODE   **
@@ -125,12 +124,11 @@ export default defineComponent({
 		let data = {}
 		data.loaded = false
 		data.is_user = false
-		// data.store = inject("store").state
+		data.store = inject("store").state
 
 		if (typeof(this.$route.params.id) == "undefined") {
 			data.is_user = true
-			const user_store = use_user_store()
-			data = { ...data, ...user_store.user_profile }
+			data = { ...data, ...data.store.user_profile }
 			data.loaded = true
 		}
 

@@ -50,10 +50,7 @@
 *******************/
 
 // External libraries
-import { defineComponent } from 'vue'
-
-// Auxiliaries
-import use_user_store from '@/store/User_Store'
+import { defineComponent, inject } from 'vue'
 
 /*********************
 **   *️⃣ MAIN CODE   **
@@ -72,8 +69,8 @@ export default defineComponent({
 	data() {
 		
 		let data = {}
-		const user_store = use_user_store()
-		data = { ...data, ...user_store.user_profile }
+		const store = inject('store').state
+		data = { ...data, ...store.user_profile }
 		console.log(data)
 		return data
 

@@ -45,7 +45,6 @@ import $ from 'jquery'
 
 // Auxiliaries
 import filters from '@/auxiliaries/Filters'
-import use_user_store from '@/store/User_Store'
 
 // Components
 import AgeS from './Toggles/AgeS.vue'
@@ -100,16 +99,15 @@ export default defineComponent({
 	},
 	data() {
 		
-		let store_parent = inject("store")
-		const user_store = use_user_store()
+		let store = inject("store").state
 		const filter = filters[this.name]
 
 		if (filter.type == 'dropdown') {
 			
-			const selected = user_store.looking_for[this.name]
+			const selected = store.looking_for[this.name]
 
 			return {
-				store:			store_parent.state,
+				store,
 				opened: 		'closed',
 				filter:			filter,
 				type: 			filter.type,
@@ -120,7 +118,7 @@ export default defineComponent({
 		} else if (filter.type == 'custom') {
 			
 			return {
-				store:			store_parent.state,
+				store,
 				opened: 		'closed',
 				type: 			'custom',
 				text: 			filter.placeholder
