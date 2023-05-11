@@ -182,3 +182,7 @@ section h2 {
 .selecter input {
 	display: inline-block;
 }
+
+.selecter input.hide {
+	display: none;
+}

@@ -10,7 +10,14 @@ const default_state = {
 		uid: 			1,
 		first_name: 	'Tom',
 	},
-	show_notifications_banner:		false,
+	looking_for: {
+		who:			'mlw',
+		age:			{
+			min:	26,
+			max:	34,
+		}
+	},
+	show_notifications_banner:		false
 }
 
 const getdefault_state = () => {

@@ -1,23 +1,28 @@
 <template>
-	<div id="age_inner">
+	<form id="age_inner" @submit.prevent="close()">
 		From
-		<input type="text" name="min_age" v-model="min_age" />
+		<input type="text" name="min_age" v-model="l.age.min" />
 		to
-		<input type="text" name="max_age" v-model="max_age"  />
-		<!-- <div>
-			bbbbb bbbbb bbbbb bbbbb  
-		</div> -->
-	</div>
+		<input type="text" name="max_age" v-model="l.age.max"  />
+		<input type="submit" class="hide" />
+	</form>
 </template>
 
 
 <script setup>
-
-	import use_user_store from '@/store/User_Store'
-	const user_store = use_user_store()
-	const min_age = user_store.looking_for.age.min
-	const max_age = user_store.looking_for.age.max
 	
+	import { inject } from 'vue'
+	const l = inject("store").state.looking_for
+	const props = defineProps({
+		close: {
+			type:		Function,
+			required:	true
+		}
+	})
+	function tstclose() {
+		alert(3333)
+	}
+
 </script>
 
 

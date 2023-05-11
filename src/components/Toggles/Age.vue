@@ -1,12 +1,10 @@
 <template>
 	<span>
-		Ages {{ min_age }} to {{ max_age }}
+		Ages {{ l.age.min }} to {{ l.age.max }}
 	</span>
 </template>
 
 <script setup>
-	import use_user_store from '@/store/User_Store'
-	const user_store = use_user_store()
-	const min_age = user_store.looking_for.age.min
-	const max_age = user_store.looking_for.age.max
+	import { inject } from 'vue'
+	const l = inject("store").state.looking_for
 </script>

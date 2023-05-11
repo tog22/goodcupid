@@ -1,7 +1,7 @@
 <template>
-	<div :class="'option '+open" :id="'o_'+name">
+	<div :class="'option '+opened" :id="'o_'+name">
 		<div class="selecter dropdown"  v-if="type == 'dropdown'" >
-			<div class="close" @click="close_toggle">
+			<div class="close" @click="close">
 				×
 			</div>
 			<div v-if="type == 'dropdown'" class="dropdown">
@@ -18,14 +18,14 @@
 			</div>
 		</div>
 		<div class="selecter" v-if="name == 'age'">
-			<div class="close" @click="close_toggle">
+			<div class="close" @click="close">
 				×
 			</div>
 			<div class="s_content">
-				<component :is="sel" />
+				<component :is="sel" :close="close" />
 			</div>
 		</div>
-		<div class="chosen" @click="open_toggle">
+		<div class="chosen" @click="open">
 			<component :is="disp" />
 		</div>
 		<div class="s_below">
@@ -91,19 +91,11 @@ export default defineComponent({
 		goto(id) {
 			this.$router.push("/profile/"+id)
 		},
-		open_toggle() {
-			if (this.open == 'closed') {
-				this.open = 'open'
-			} else {
-				this.open = 'closed'
-			}
+		open() {
+			this.opened = 'open'
 		},
-		close_toggle() {
-			if (this.open == 'open') {
-				this.open = 'closed'
-			} else {
-				this.open = 'open'
-			}
+		close() {
+			this.opened = 'closed'
 		}
 	},
 	data() {
@@ -118,7 +110,7 @@ export default defineComponent({
 
 			return {
 				store:			store_parent.state,
-				open: 			'closed',
+				opened: 		'closed',
 				filter:			filter,
 				type: 			filter.type,
 				text: 			filter.options[selected].text,
@@ -128,7 +120,8 @@ export default defineComponent({
 		} else if (filter.type == 'custom') {
 			
 			return {
-				open: 			'closed',
+				store:			store_parent.state,
+				opened: 		'closed',
 				type: 			'custom',
 				text: 			filter.placeholder
 			}
