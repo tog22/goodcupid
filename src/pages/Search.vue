@@ -33,7 +33,7 @@
 *******************/
 
 // External libraries
-import { defineComponent, inject, markRaw } from 'vue'
+import { defineComponent, inject, watch, markRaw } from 'vue'
 
 // Auxiliaries
 import api from '@/auxiliaries/api'
@@ -69,6 +69,11 @@ export default defineComponent({
 		}
 
 	},
+	watch: {
+		lf(new_val, old_val) {
+			alert(444)
+		}
+	},
 	methods: {
 		goto(id) {
 			this.$router.push("/profile/"+id)
@@ -76,7 +81,6 @@ export default defineComponent({
 		do_search() {
 			let loading_profiles = []
 			const get_url = '/records/profiles/'
-			
 		}
 	},
 	data() {
@@ -84,10 +88,11 @@ export default defineComponent({
 		/*******************
 		**  📦 DATA STORE **
 		*******************/
-		let store_parent = inject("store")
+		let store = inject("store").state
 
 		return {
-			store:			store_parent.state,
+			store,
+			lf: 			store.looking_for,
 			profiles:		[],
 			Age: 			markRaw(Age),
 			AgeS: 			markRaw(AgeS)
@@ -103,6 +108,17 @@ export default defineComponent({
 function lo(to_log) {
 	console.log(to_log)
 }
+
+</script>
+
+<script setup>
+
+let lf = inject("store").state.looking_for
+watch(lf, (new_val, old_val) => {
+	alert(33444)
+})
+
+
 
 </script>
 
