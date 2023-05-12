@@ -11,6 +11,7 @@
 
 <script setup>
 	
+	import bus from '@/auxiliaries/bus'
 	import { inject } from 'vue'
 	const l = inject("store").state.looking_for
 
@@ -24,6 +25,7 @@
 	function submit() {
 		if (validate()) {
 			props.close()
+			bus.emit('redo_search')
 		}
 	}
 
