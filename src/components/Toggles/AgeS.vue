@@ -1,9 +1,9 @@
 <template>
 	<form id="age_inner" @submit.prevent="submit" @keydown.enter="submit">
 		From
-		<input type="text" name="min_age" v-model="l.age.min" />
+		<input type="text" name="min_age" v-model="min" />
 		to
-		<input type="text" name="max_age" v-model="l.age.max"  />
+		<input type="text" name="max_age" v-model="max"  />
 		<input type="submit" class="hide" />
 	</form>
 </template>
@@ -12,8 +12,12 @@
 <script setup>
 	
 	import bus from '@/auxiliaries/bus'
-	import { inject } from 'vue'
+	import { inject, ref } from 'vue'
 	const l = inject("store").state.looking_for
+	let min = l.age.min
+	min = ref(min)
+	let max = l.age.max
+	max = ref(max)
 
 	const props = defineProps({
 		close: {
@@ -24,8 +28,10 @@
 
 	function submit() {
 		if (validate()) {
+			l.age.min = min.value
+			l.age.max = max.value
 			props.close()
-			bus.emit('redo_search')
+			bus.emit('search')
 		}
 	}
 
