@@ -11,7 +11,7 @@ const default_state = {
 		first_name: 	'Tom',
 	},
 	looking_for: {
-		who:			'mlw',
+		// who:			'mlw',
 		age:			{
 			min:	26,
 			max:	34,

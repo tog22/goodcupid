@@ -37,6 +37,7 @@ import { defineComponent, inject, watch, markRaw } from 'vue'
 
 // Auxiliaries
 import api from '@/auxiliaries/api'
+import bus from '@/auxiliaries/bus'
 
 // Components
 import Toggle from '../components/Toggle.vue'
@@ -55,33 +56,44 @@ export default defineComponent({
 		AgeS
 	},
 	created() {
-
-		this.profiles = []
-		if (Object.keys(this.$route.params).length === 0) {
-			const get_url = '/records/profiles/'
-			api.get(get_url).then((response) => {
-				for (const profile_found of response.records ) {
-					profile_found.pics = JSON.parse(profile_found.pics)
-					profile_found.pic = profile_found.pics[0]
-					this.profiles.push(profile_found)
-				}
-			})
-		}
-
-	},
-	watch: {
-		lf(new_val, old_val) {
-			alert(444)
-		}
+		this.do_search()
+		bus.on('search', () => {
+			this.do_search()
+		});
 	},
 	methods: {
 		goto(id) {
 			this.$router.push("/profile/"+id)
 		},
+		build_search() {
+			this.search_params = {}
+			for (let key in this.lf) {
+				if ('min' in this.lf[key]) {
+					this.search_params[key] = 'filter='+key+',ge,'+this.lf[key].min+'&'
+					this.search_params[key] += 'filter='+key+',le,'+this.lf[key].max
+				}
+			}
+		},
 		do_search() {
+			this.build_search()
 			let loading_profiles = []
-			const get_url = '/records/profiles/'
+			let get_url = '/records/profiles?'
+			for (let key in this.search_params) {
+				get_url += this.search_params[key]+'&'
+			}
+			get_url = get_url.slice(0, -1)
+			api.get(get_url).then((response) => {
+				for (const profile_found of response.records ) {
+					profile_found.pics = JSON.parse(profile_found.pics)
+					profile_found.pic = profile_found.pics[0]
+					loading_profiles.push(profile_found)
+				}
+				this.profiles = loading_profiles
+			})
+
+
 		}
+
 	},
 	data() {
 		
@@ -93,6 +105,7 @@ export default defineComponent({
 		return {
 			store,
 			lf: 			store.looking_for,
+			search_params:  {},
 			profiles:		[],
 			Age: 			markRaw(Age),
 			AgeS: 			markRaw(AgeS)
@@ -113,10 +126,10 @@ function lo(to_log) {
 
 <script setup>
 
-let lf = inject("store").state.looking_for
-watch(lf, (new_val, old_val) => {
-	alert(33444)
-})
+// let lf = inject("store").state.looking_for
+// watch(lf, (new_val, old_val) => {
+// 	alert(33444)
+// })
 
 
 
