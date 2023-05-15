@@ -5,21 +5,19 @@
 				<!-- <img id="logo" src="/images/telescope.png" height="40" width="40" alt="🔭" /> -->
 				<div id="app_title">GoodCupid</div>
 			</div>
-			<div id="navbar_links">
-				<router-link to="/search">
-					Search
-				</router-link>
-				<router-link to="/message">
-					Message
-				</router-link>
-				<router-link to="/profile">
-					Profile
-				</router-link>
-				<!-- <router-link to="/settings">
-					Settings
-				</router-link> -->
-				<!--
-				<div class="menu_container">
+			<div id="menu_zone">
+				<div id="navbar_links">
+					<router-link to="/search">
+						Search
+					</router-link>
+					<router-link to="/message">
+						Message
+					</router-link>
+					<router-link to="/profile">
+						Profile
+					</router-link>
+				</div>
+				<div id="dropdown_container">
 					<div class="menu_icon" @click="is_menu_open = !is_menu_open">
 						☰
 					</div>
@@ -33,7 +31,6 @@
 						</div>
 					</div>
 				</div>
-				-->
 			</div>
 		</div>
 	</header>
@@ -66,16 +63,16 @@
 				is_menu_open: false,
 				menu_links: [
 				{
-					title: 'Home',
-					url: '/'
+					title: 'Search',
+					url: '/search'
 				},
 				{
-					title: 'Log in',
-					url: '/login'
+					title: 'Message',
+					url: '/message'
 				},
 				{
-					title: 'Sign up',
-					url: '/signup'
+					title: 'Profile',
+					url: '/profile'
 				}
 				]
 			}

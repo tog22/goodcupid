@@ -83,6 +83,32 @@ h4.section_title {
 
 
 /***************
+**  MENU BAR  **
+***************/
+
+@media screen and (max-width: 549px) {
+	#dropdown_container {
+		display: block;
+	}
+
+	#navbar_links {
+		display: none;
+	}
+}
+
+@media screen and (min-width: 550px) {
+	#dropdown_container {
+		display: none;
+	}
+
+	#navbar_links {
+		display: block;
+	}
+}
+
+
+
+/***************
 **  TOP ZONE  **
 ***************/
 
