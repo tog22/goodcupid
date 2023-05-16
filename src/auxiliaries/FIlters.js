@@ -3,10 +3,12 @@ const filters = {
 		type: 	'dropdown',
 		options: {
 			mlw: {
-				text: 'Men <span class="s_light">who like women</span>'
+				text: 		'Men <span class="s_light">who like women</span>',
+				filter:		'gender,eq,m&filter=looking_for,cs,w'
 			},
 			wlm: {
-				text: 'Women <span class="s_light">who like men</span>'
+				text: 		'Women <span class="s_light">who like men</span>',
+				filter:		'gender,eq,w&filter=looking_for,cs,m'
 			},
 		}
 	},

@@ -8,10 +8,13 @@ const default_state = {
 	logged_in: 						false,
 	user: {
 		uid: 			1,
-		first_name: 	'Tom',
+		first_name: 	'Jane St. Clair',
 	},
 	looking_for: {
-		// who:			'mlw',
+		who:			{
+			dropdown:		'mlw',
+			filter:			'filter=gender,eq,m&filter=looking_for,cs,w',
+		},
 		age:			{
 			min:	26,
 			max:	34,

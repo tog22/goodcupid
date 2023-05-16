@@ -68,7 +68,7 @@ export default defineComponent({
 		build_search() {
 			this.search_params = {}
 			for (let key in this.lf) {
-				if ('min' in this.lf[key]) {
+				if ('min' in this.lf[key] && 'max' in this.lf[key]) {
 					this.search_params[key] = 'filter='+key+',ge,'+this.lf[key].min+'&'
 					this.search_params[key] += 'filter='+key+',le,'+this.lf[key].max
 				}
