@@ -5,7 +5,7 @@
 				Show me…
 			</h2>
 			<div class="s_content">
-				<!-- <Toggle name="who" /> -->
+				<Toggle name="who" />
 				<Toggle name="age" :disp="Age" :sel="AgeS" />
 				<!-- <Toggle name="distance" />
 				<Toggle name="height" /> -->
