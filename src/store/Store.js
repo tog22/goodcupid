@@ -12,7 +12,8 @@ const default_state = {
 	},
 	looking_for: {
 		who:			{
-			dropdown:		'mlw',
+			key:			'mlw',
+			text:			'Men <span class="s_light">who like women</span>',
 			filter:			'filter=gender,eq,m&filter=looking_for,cs,w',
 		},
 		age:			{

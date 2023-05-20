@@ -8,13 +8,13 @@
 				<div 
 					v-for="(option, index) in filter.options"
 					:key="'o'+index"
-					@click="text = option.text"
+					@click="dropdown_select(option)"
 				>
 					<span v-html="option.text"></span>
 				</div>
 			</div>
 			<div v-else-if="type == 'custom'" class="custom">
-				
+				code for type=custom goes here
 			</div>
 		</div>
 		<div class="selecter" v-if="name == 'age'">
@@ -22,11 +22,21 @@
 				×
 			</div>
 			<div class="s_content">
-				<component :is="sel" :close="close" />
+				<div v-if="component_passed">
+					<component :is="sel" :close="close" />
+				</div>
 			</div>
 		</div>
 		<div class="chosen" @click="open">
-			<component :is="disp" />
+			<div v-if="component_passed">
+				<component :is="disp" />
+			</div>
+			<div v-else-if="type == 'dropdown'">
+				<span v-html="text"></span>
+			</div>
+			<div v-else>
+				code for when component not passed or not a dropdown
+			</div>
 		</div>
 		<div class="s_below">
 			
@@ -44,10 +54,12 @@ import { defineComponent, inject } from 'vue'
 import $ from 'jquery'
 
 // Auxiliaries
+import bus from '@/auxiliaries/bus'
 import filters from '@/auxiliaries/Filters'
 
 // Components
 import AgeS from './Toggles/AgeS.vue'
+import { faBus } from '@fortawesome/free-solid-svg-icons'
 
 
 /*********************
@@ -72,12 +84,10 @@ export default defineComponent({
 			required: true
 		},
 		disp: {
-			type: Object,
-			required: true
+			type: Object
 		},
 		sel: {
-			type: Object,
-			required: true
+			type: Object
 		}
 	},
 	mounted() {
@@ -95,6 +105,23 @@ export default defineComponent({
 		},
 		close() {
 			this.opened = 'closed'
+		},
+		dropdown_select(option) {
+			this.text = option.text
+			let filter_in_store = this.store.looking_for[this.name]
+			filter_in_store.key = option.key
+			filter_in_store.text = option.text
+			filter_in_store.filter = option.filter
+			bus.emit('search')
+			this.close()
+		}
+	},
+	computed: {
+		component_passed() {
+			if (this.disp === undefined)
+				return false
+			else
+				return true
 		}
 	},
 	data() {
@@ -104,14 +131,15 @@ export default defineComponent({
 
 		if (filter.type == 'dropdown') {
 			
-			const selected = store.looking_for[this.name]
+			const key = store.looking_for[this.name].key
 
 			return {
 				store,
+				filter,
+				key,
 				opened: 		'closed',
-				filter:			filter,
 				type: 			filter.type,
-				text: 			filter.options[selected].text,
+				text: 			filter.options[key].text,
 				cross_shown:	false,
 			}
 
@@ -153,8 +181,10 @@ function lo(to_log) {
 	font-weight: bold;
 }
 
-.option .chosen,
-.option .selecter.dropdown {
+.option .chosen
+/* ,
+.option .selecter.dropdown */
+{
 	border-radius: 18px;
 }
 
