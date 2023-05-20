@@ -7,6 +7,7 @@
 			<div class="s_content">
 				<Toggle name="who" />
 				<Toggle name="age" :disp="Age" :sel="AgeS" />
+				<Toggle name="height" :disp="Height" :sel="HeightS" />
 				<!-- <Toggle name="distance" />
 				<Toggle name="height" /> -->
 			</div>
@@ -43,6 +44,8 @@ import bus from '@/auxiliaries/bus'
 import Toggle from '../components/Toggle.vue'
 import Age from '../components/Toggles/Age.vue'
 import AgeS from '../components/Toggles/AgeS.vue'
+import Height from '../components/Toggles/Height.vue'
+import HeightS from '../components/Toggles/HeightS.vue'
 
 /*********************
 **   *️⃣ MAIN CODE   **
