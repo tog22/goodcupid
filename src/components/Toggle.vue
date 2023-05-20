@@ -28,15 +28,15 @@
 			</div>
 		</div>
 		<div class="chosen" @click="open">
-			<div v-if="component_passed">
+			<span v-if="component_passed">
 				<component :is="disp" />
-			</div>
-			<div v-else-if="type == 'dropdown'">
+			</span>
+			<span v-else-if="type == 'dropdown'">
 				<span v-html="text"></span>
-			</div>
-			<div v-else>
+			</span>
+			<span v-else>
 				code for when component not passed or not a dropdown
-			</div>
+			</span>
 		</div>
 		<div class="s_below">
 			
@@ -196,11 +196,11 @@ function lo(to_log) {
 	height: 36px;
 }
 
-.option .chosen::after {
+/* .option .chosen::after {
 	content: '▾';
     position: relative;
     left: 0.5em;
-}
+} */
 
 .option .s_below {
 	height: 1.5em;

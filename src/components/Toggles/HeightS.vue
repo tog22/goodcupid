@@ -1,10 +1,10 @@
 <template>
 	<span>
-		{{ l.height.min }}cm and up
+		selector
 	</span>
 </template>
 
 <script setup>
-	import { inject } from 'vue'
-	const l = inject("store").state.looking_for
+	// import { inject } from 'vue'
+	// const l = inject("store").state.looking_for
 </script>

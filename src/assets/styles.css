@@ -212,3 +212,19 @@ section h2 {
 .selecter input.hide {
 	display: none;
 }
+
+.selecter.dropdown {
+	background-color: var(--bright-blue);
+}
+
+.dropdown > div {
+	padding-bottom: 0.25em;
+}
+
+.dropdown > div:first-child {
+	padding-top: 0;
+}
+
+.dropdown > div:last-child {
+	padding-bottom: 0;
+}
