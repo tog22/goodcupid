@@ -222,9 +222,14 @@ section h2 {
 .option .selecter {
 	border-radius: 10px;
 }
+
 .option .chosen {
-	margin-right: 1.5em;
 	height: 36px;
+}
+
+.option .chosen,
+.option .selecter {
+	margin-right: 1.5em;
 }
 
 /* .option .chosen::after {
@@ -237,12 +242,18 @@ section h2 {
 	height: 1.5em;
 }
 
+.open .chosen,
 .closed .selecter {
 	display: none;
 }
 
+/* .closed .chosen,
+.closed .selecter {
+	display: none;
+} */
+
 .selecter {
-	position: absolute;
+	/* position: absolute; */
 	z-index: 1;
 	width: max-content;
 	max-width: 400px;
@@ -260,12 +271,19 @@ section h2 {
 	font-weight: normal;
 }
 
+.selecter {
+	display: flex;
+	flex-direction: row;
+}
+
+/* 
+
 .selecter .close {
 	float: right;
     position: relative;
     left: 14px;
     top: -8px;
-}
+} */
 
 .selecter input {
 	display: inline-block;
@@ -290,3 +308,10 @@ section h2 {
 .dropdown > div:last-child {
 	padding-bottom: 0;
 }
+
+
+
+/***********************
+**  SPECIFIC TOGGLES  **
+***********************/
+

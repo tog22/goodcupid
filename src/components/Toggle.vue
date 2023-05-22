@@ -1,9 +1,6 @@
 <template>
 	<div :class="'option '+opened+' '+in_store" :id="'o_'+name">
-		<div class="selecter dropdown"  v-if="type == 'dropdown'" >
-			<div class="close" @click="close">
-				×
-			</div>
+		<div v-if="type == 'dropdown'" class="selecter dropdown" >
 			<div v-if="type == 'dropdown'" class="dropdown">
 				<div 
 					v-for="(option, index) in filter.options"
@@ -13,18 +10,18 @@
 					<span v-html="option.text"></span>
 				</div>
 			</div>
-			<div v-else-if="type == 'custom'" class="custom">
-				code for type=custom goes here
-			</div>
-		</div>
-		<div class="selecter" v-if="name == 'age'">
 			<div class="close" @click="close">
 				×
 			</div>
+		</div>
+		<div v-else class="selecter">
 			<div class="s_content">
 				<div v-if="component_passed">
 					<component :is="sel" :close="close" />
 				</div>
+			</div>
+			<div class="close" @click="close">
+				×
 			</div>
 		</div>
 		<div class="chosen" @click="open">
@@ -141,7 +138,7 @@ export default defineComponent({
 		let data = {
 			store,
 			cross_shown:	false,
-			opened: 		'closed',
+			opened: 		'open',
 			display_name: 	capitalize_first_letter(this.name),
 		}
 
@@ -183,12 +180,6 @@ function capitalize_first_letter(string) {
 </script>
 
 <style>
-
-
-/***********************
-**  SPECIFIC OPTIONS  **
-***********************/
-
 
 
 </style>
