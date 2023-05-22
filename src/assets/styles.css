@@ -189,9 +189,71 @@ section h2 {
 **  SEARCH PAGE  **
 ******************/
 
-#search .option .chosen {
+.option .chosen {
+	background-color: var(--bright-blue);
+	color: white;
+}
+
+.option.is_set .chosen {
 	background-color: var(--blue);
 	color: white;
+}
+
+
+.option {
+	position: relative;
+}
+
+.option .chosen,
+.option .selecter {
+	padding: 7px 1.5em 7px 1.5em;
+	display: inline-block;
+	line-height: 22px;
+	font-weight: bold;
+}
+
+.option .chosen
+/* ,
+.option .selecter.dropdown */
+{
+	border-radius: 18px;
+}
+
+.option .selecter {
+	border-radius: 10px;
+}
+.option .chosen {
+	margin-right: 1.5em;
+	height: 36px;
+}
+
+/* .option .chosen::after {
+	content: '▾';
+    position: relative;
+    left: 0.5em;
+} */
+
+.option .s_below {
+	height: 1.5em;
+}
+
+.closed .selecter {
+	display: none;
+}
+
+.selecter {
+	position: absolute;
+	z-index: 1;
+	width: max-content;
+	max-width: 400px;
+
+	background-color: #186BCC; /* light =  #BFE4EF; /*  #508ACC; */
+	color: white;
+	box-sizing: content-box;
+}
+
+.selecter input[type="text"] {
+	border: none;
 }
 
 .option .s_light {

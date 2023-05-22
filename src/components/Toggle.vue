@@ -1,5 +1,5 @@
 <template>
-	<div :class="'option '+opened" :id="'o_'+name">
+	<div :class="'option '+opened+' '+in_store" :id="'o_'+name">
 		<div class="selecter dropdown"  v-if="type == 'dropdown'" >
 			<div class="close" @click="close">
 				×
@@ -28,14 +28,18 @@
 			</div>
 		</div>
 		<div class="chosen" @click="open">
-			<span v-if="component_passed">
-				<component :is="disp" />
+			<span v-if="in_store">
+				<span v-if="component_passed">
+					<component :is="disp" />
+				</span>
+				<span v-else-if="type == 'dropdown'">
+					<span v-html="text"></span>
+				</span>
+				<span v-else>
+					code for when component not passed or not a dropdown
+				</span>
 			</span>
-			<span v-else-if="type == 'dropdown'">
-				<span v-html="text"></span>
-			</span>
-			<span v-else>
-				code for when component not passed or not a dropdown
+			<span v-else v-html="display_name">
 			</span>
 		</div>
 		<div class="s_below">
@@ -122,37 +126,44 @@ export default defineComponent({
 				return false
 			else
 				return true
+		},
+		in_store() {
+			if (this.store.looking_for.hasOwnProperty(this.name))
+				return 'is_set'
+			else
+				return ''
 		}
 	},
 	data() {
 		
 		let store = inject("store").state
+
+		let data = {
+			store,
+			cross_shown:	false,
+			opened: 		'closed',
+			display_name: 	capitalize_first_letter(this.name),
+		}
+
 		const filter = filters[this.name]
-
 		if (filter.type == 'dropdown') {
-			
 			const key = store.looking_for[this.name].key
-
-			return {
-				store,
+			data = {
+				...data,
 				filter,
 				key,
-				opened: 		'closed',
 				type: 			filter.type,
 				text: 			filter.options[key].text,
-				cross_shown:	false,
 			}
-
 		} else if (filter.type == 'custom') {
-			
-			return {
-				store,
-				opened: 		'closed',
+			data = {
+				...data,
 				type: 			'custom',
 				text: 			filter.placeholder
 			}
-
 		}
+
+		return data
 
 	}
 })
@@ -165,65 +176,14 @@ function lo(to_log) {
 	console.log(to_log)
 }
 
+function capitalize_first_letter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 </script>
 
 <style>
 
-.option {
-	position: relative;
-}
-
-.option .chosen,
-.option .selecter {
-	padding: 7px 1.5em 7px 1.5em;
-	display: inline-block;
-	line-height: 22px;
-	font-weight: bold;
-}
-
-.option .chosen
-/* ,
-.option .selecter.dropdown */
-{
-	border-radius: 18px;
-}
-
-.option .selecter {
-	border-radius: 10px;
-}
-.option .chosen {
-	margin-right: 1.5em;
-	height: 36px;
-}
-
-/* .option .chosen::after {
-	content: '▾';
-    position: relative;
-    left: 0.5em;
-} */
-
-.option .s_below {
-	height: 1.5em;
-}
-
-.closed .selecter {
-	display: none;
-}
-
-.selecter {
-	position: absolute;
-	z-index: 1;
-	width: max-content;
-	max-width: 400px;
-
-	background-color: #186BCC; /* light =  #BFE4EF; /*  #508ACC; */
-	color: white;
-	box-sizing: content-box;
-}
-
-.selecter input[type="text"] {
-	border: none;
-}
 
 /***********************
 **  SPECIFIC OPTIONS  **
