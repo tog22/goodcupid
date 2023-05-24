@@ -24,6 +24,12 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+textarea {
+	font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	padding: 0.4em 0.6em;
+}
+
 
 *,
 *::before,

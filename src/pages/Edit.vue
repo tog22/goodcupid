@@ -36,7 +36,40 @@
 					<label for="age">
 						Age:
 					</label>
-					<input type="text" id="name" name="name" v-model="age" />
+					<input type="text" id="age" name="age" v-model="age" />
+				</div>
+				<div class="s_item">
+					<label for="height">
+						Height (cm):
+					</label>
+					<input type="text" id="height" name="height" v-model="height" />
+				</div>
+			</div>
+			<div class="prompts">
+				<div class="s_item">
+					<label for="about_me"> 
+						About me
+					</label>
+					<textarea v-model="about_me" id="about_me" name="about_me" rows="5">
+					</textarea>
+				</div>
+			</div>
+			<div class="prompts">
+				<div class="s_item">
+					<label for="favourite_media"> 
+						Favourite shows, movies, music or books
+					</label>
+					<textarea v-model="favourite_media" id="favourite_media" name="favourite_media" rows="5">
+					</textarea>
+				</div>
+			</div>
+			<div class="prompts">
+				<div class="s_item">
+					<label for="message_me_if"> 
+						Message me if
+					</label>
+					<textarea v-model="message_me_if" id="message_me_if" name="message_me_if" rows="5">
+					</textarea>
 				</div>
 			</div>
 			<input type="submit" value="Save changes" />
@@ -99,12 +132,32 @@ export default defineComponent({
 .basic_details input,
 .basic_details select {
 	display: table-cell;
-	padding-right: 1em;
 	margin-bottom: 1em;
+}
+
+.basic_details label {
+	padding-right: 2em;
 }
 
 .form1 input[type="submit"] {
 	margin-top: 1em;
+}
+
+.prompts label {
+	display: block;
+	margin-bottom: 0.5em;
+	font-weight: bold;
+	font-size: 1.15em;
+}
+
+.prompts > div {
+	margin: 1em 0;
+}
+
+.prompts textarea {
+	width: 100%;
+	max-width: 600px;
+	
 }
 
 </style>
