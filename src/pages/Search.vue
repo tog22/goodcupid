@@ -76,10 +76,14 @@ export default defineComponent({
 				} else if ('min' in this.lf[key] && 'max' in this.lf[key]) {
 					this.search_params[key] = 'filter='+key+',ge,'+this.lf[key].min+'&'
 					this.search_params[key] += 'filter='+key+',le,'+this.lf[key].max
-				} 
+				} else if ('min' in this.lf[key]) {
+					this.search_params[key] = 'filter='+key+',ge,'+this.lf[key].min
+				} else if ('max' in this.lf[key]) {
+					this.search_params[key] = 'filter='+key+',le,'+this.lf[key].max
+				}
 			}
-			// lo('search_params = ')
-			// console.log(this.search_params)
+			lo('search_params = ')
+			console.log(this.search_params)
 		},
 		do_search() {
 			this.build_search()
@@ -90,7 +94,7 @@ export default defineComponent({
 			}
 			get_url = get_url.slice(0, -1)
 			api.get(get_url).then((response) => {
-				// console.log(response)
+				console.log(response)
 				for (const profile_found of response.records ) {
 					profile_found.pics = JSON.parse(profile_found.pics)
 					profile_found.pic = profile_found.pics[0]
