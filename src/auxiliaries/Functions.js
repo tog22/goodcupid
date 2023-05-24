@@ -5,10 +5,6 @@ const fn = {
 	login:
 	function(id) {
 		// const store = inject('store')
-		// console.log(store)
-		// debugger
-
-		
 		const get_url = '/records/profiles/'+id
 		api.get(get_url).then((response) => {
 			response.pics = JSON.parse(response.pics)

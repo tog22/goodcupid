@@ -14,9 +14,14 @@
 	import bus from '@/auxiliaries/bus'
 	import { inject, ref } from 'vue'
 	const l = inject("store").state.looking_for
-	let min = l.age.min
+
+	let min = 18
+	let max = 99
+	if ('age' in l) {
+		min = l.age.min
+		max = l.age.max
+	}
 	min = ref(min)
-	let max = l.age.max
 	max = ref(max)
 
 	const props = defineProps({
@@ -28,27 +33,29 @@
 
 	function submit() {
 		if (validate()) {
-			l.age.min = min.value
-			l.age.max = max.value
+			l.age = {
+				min: min.value,
+				max: max.value
+			}
 			props.close()
 			bus.emit('search')
 		}
 	}
 
 	function validate() {
-		if (!/^\d+$/.test(l.age.min) || !/^\d+$/.test(l.age.max)) {
+		if (!/^\d+$/.test(min.value) || !/^\d+$/.test(max.value)) {
 			alert("Age must be a number")
 			return false
 		}
-		if (l.age.min < 18) {
+		if (min.value < 18) {
 			alert("Minimum age is 18")
 			return false
 		}
-		if (l.age.max > 180) {
+		if (max.value > 180) {
 			alert("Maximum age is 180")
 			return false
 		}
-		if (l.age.min > l.age.max) {
+		if (min.value > max.value) {
 			alert("Minimum age must be less than maximum age")
 			return false
 		}
@@ -62,8 +69,6 @@
 	input {
 		width: 2em;
 		width: 3ch;
-		box-sizing: border-box;
-		margin: 0 0.2em;
 	}
 
 	#age_inner {

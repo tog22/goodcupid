@@ -138,7 +138,7 @@ export default defineComponent({
 		let data = {
 			store,
 			cross_shown:	false,
-			opened: 		'open',
+			opened: 		'closed',
 			display_name: 	capitalize_first_letter(this.name),
 		}
 
