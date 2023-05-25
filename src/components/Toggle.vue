@@ -4,15 +4,16 @@
 			<div v-if="type == 'dropdown'" class="dropdown">
 				<div 
 					v-for="(option, index) in filter.options"
+					class="s_item"
 					:key="'o'+index"
 					@click="dropdown_select(option)"
 				>
 					<span v-html="option.text"></span>
 				</div>
 			</div>
-			<div class="close" @click="close">
-				×
-			</div>
+			<!-- <div class="close" @click="close">
+				✔︎
+			</div> -->
 		</div>
 		<div v-else class="selecter">
 			<div class="s_content">
@@ -21,7 +22,7 @@
 				</div>
 			</div>
 			<div class="close" @click="close">
-				×
+				✔︎<!-- × -->
 			</div>
 		</div>
 		<div class="chosen" @click="open">
@@ -180,6 +181,7 @@ function capitalize_first_letter(string) {
 </script>
 
 <style>
+
 
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<form id="gfdg" @submit.prevent="submit" @keydown.enter="submit">
+	<form @submit.prevent="submit" @keydown.enter="submit">
 		At least <input type="text" name="min_height" v-model="min" />cm
 		<input type="submit" class="hide" />
 	</form>
@@ -23,7 +23,6 @@
 			required:	true
 		}
 	})
-
 	function submit() {
 		if (validate()) {
 			l.height = {
@@ -35,7 +34,6 @@
 	}
 
 	function validate() {
-		debugger
 		if (!/^\d+$/.test(min.value)) {
 			alert(min)
 			alert("Height must be a number")

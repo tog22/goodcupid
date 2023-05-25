@@ -298,9 +298,11 @@ section h2 {
 .selecter .close {
     position: relative;
     left: 14px;
-    top: -8px;
-	width: 8px;
+	width: 12px;
 	margin-left: -8px;
+    /* top: -8px;
+	width: 8px;
+	margin-left: -8px; */
 }
 
 .selecter input {
@@ -327,6 +329,13 @@ section h2 {
 	padding-bottom: 0;
 }
 
+.selecter .dropdown {
+	cursor: pointer;
+}
+
+.dropdown .s_item:hover {
+	color: #f6f600;
+}
 
 
 /***********************
