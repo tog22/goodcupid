@@ -8,6 +8,7 @@
 				<Toggle name="who" />
 				<Toggle name="age" :disp="Age" :sel="AgeS" />
 				<Toggle name="height" :disp="Height" :sel="HeightS" />
+				<Toggle name="religion" />
 				<!-- <Toggle name="distance" />
 				<Toggle name="height" /> -->
 			</div>

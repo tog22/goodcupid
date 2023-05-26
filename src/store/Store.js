@@ -20,6 +20,7 @@ const default_state = {
 			min:	26,
 			max:	34,
 		}
+
 	},
 	show_notifications_banner:		false
 }

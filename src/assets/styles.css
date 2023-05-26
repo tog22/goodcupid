@@ -286,24 +286,24 @@ section h2 {
 	flex-direction: row;
 }
 
-/* 
+/* style for X */
 
 .selecter .close {
 	float: right;
     position: relative;
     left: 14px;
     top: -8px;
-} */
+	width: 8px;
+	margin-left: -8px;
+}
 
-.selecter .close {
+/* Style for ✔︎ */
+/* .selecter .close {
     position: relative;
     left: 14px;
 	width: 12px;
 	margin-left: -8px;
-    /* top: -8px;
-	width: 8px;
-	margin-left: -8px; */
-}
+} */
 
 .selecter input {
 	display: inline-block;
@@ -335,6 +335,31 @@ section h2 {
 
 .dropdown .s_item:hover {
 	color: #f6f600;
+}
+
+.checkboxes {
+	display: flex;
+	flex-direction: column;
+}
+
+.checkboxes .s_item {
+	padding: 0.25em 0;
+	padding-right: 1em;
+}
+
+.checkboxes label {
+	display: inline-block;
+	/* white-space: nowrap; */
+	cursor: pointer;
+}
+
+.checkboxes input {
+	vertical-align: middle;
+}
+
+.checkboxes label span {
+	vertical-align: middle;
+	padding-left: 0.3em;
 }
 
 

@@ -1,7 +1,7 @@
 <template>
 	<div :class="'option '+opened+' '+in_store" :id="'o_'+name">
 		<div v-if="type == 'dropdown'" class="selecter dropdown" >
-			<div v-if="type == 'dropdown'" class="dropdown">
+			<div class="dropdown">
 				<div 
 					v-for="(option, index) in filter.options"
 					class="s_item"
@@ -14,6 +14,23 @@
 			<!-- <div class="close" @click="close">
 				✔︎
 			</div> -->
+		</div>
+		<div v-else-if="type == 'checkboxes'" class="selecter" >
+			<div class="checkboxes">
+				<div 
+				v-for="(option, index) in options"
+				class="s_item"
+				:key="'o'+index"
+				>
+					<label :for="'o_'+name+'_'+index" >
+						<input type="checkbox"  @click="checkbox_click(name, option, index)" :id="'o_'+name+'_'+index" v-model="option.selected" />
+						<span v-html="option.text"></span>
+					</label>
+				</div>
+			</div>
+			<div class="close" @click="close">
+				×
+			</div>
 		</div>
 		<div v-else class="selecter">
 			<div class="s_content">
@@ -116,6 +133,11 @@ export default defineComponent({
 			filter_in_store.filter = option.filter
 			bus.emit('search')
 			this.close()
+		},
+		checkbox_click(name, option, index) {
+			// console.log(name, '<n o>',option, 'i',index)
+			// religion <n o> Proxy(Object) {key: 'mu', text: 'Muslim', filter: 'filter3=religion,eq,mu', selected: false}[[Handler]]: Object[[Target]]: Object[[IsRevoked]]: false i mu
+			
 		}
 	},
 	computed: {
@@ -144,20 +166,69 @@ export default defineComponent({
 		}
 
 		const filter = filters[this.name]
-		if (filter.type == 'dropdown') {
-			const key = store.looking_for[this.name].key
-			data = {
-				...data,
-				filter,
-				key,
-				type: 			filter.type,
-				text: 			filter.options[key].text,
-			}
-		} else if (filter.type == 'custom') {
+
+		if (filter.type == 'custom') {
+
 			data = {
 				...data,
 				type: 			'custom',
 				text: 			filter.placeholder
+			}
+
+		} else if (filter.type == 'dropdown') {
+			
+			if (this.name in store.looking_for) {
+				const key = store.looking_for[this.name].key
+				data = {
+					...data,
+					key,
+					filter,
+					type: 			filter.type,
+					text: 			filter.options[key].text,
+				}
+			} else {
+				data = {
+					...data,
+					filter,
+					type: 			filter.type,
+					text: 			filter.placeholder,
+				}
+			}
+
+		} else if (filter.type == 'checkboxes') {
+
+			let options = dc(filter.options)
+			for (let key in options) {
+				options[key].selected = false
+			}
+
+			let text = '<strong>'+data.display_name+'</strong>';
+			let is_anything_set = false
+
+			if (this.name in store.looking_for) {
+				for (const key in store.looking_for[this.name]) {
+					options[key].selected = true
+					is_anything_set	= true
+				}
+			}
+
+			if (is_anything_set) {
+				text += ': '
+				const _options = Object.entries(options)
+				const length = _options.length;
+				_options.forEach(([key, value], index) => {
+					text += value.text
+					if (index !== length - 1) {
+						text += ', '
+					}
+				});
+			}
+			
+			data = {
+				...data,
+				options,
+				text,
+				type: 			filter.type
 			}
 		}
 
@@ -176,6 +247,11 @@ function lo(to_log) {
 
 function capitalize_first_letter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// deep copy
+function dc(obj) {
+	return JSON.parse(JSON.stringify(obj))
 }
 
 </script>
