@@ -50,6 +50,9 @@
 				<span v-else-if="type == 'dropdown'">
 					<span v-html="text"></span>
 				</span>
+				<span v-else-if="type == 'checkboxes'">
+					<span v-html="text"></span>
+				</span>
 				<span v-else>
 					code for when component not passed or not a dropdown
 				</span>
@@ -135,9 +138,27 @@ export default defineComponent({
 			this.close()
 		},
 		checkbox_click(name, option, index) {
-			// console.log(name, '<n o>',option, 'i',index)
+			console.log(name, '<n o>',option, 'i',index)
 			// religion <n o> Proxy(Object) {key: 'mu', text: 'Muslim', filter: 'filter3=religion,eq,mu', selected: false}[[Handler]]: Object[[Target]]: Object[[IsRevoked]]: false i mu
-			
+			console.log(name, '<n')
+			console.log(option, 'o>')
+			console.log(index, 'i')
+			let checked = !option.selected 
+				// ↑ opposite, becuase it gets set after this function is called
+			if (!this.store.looking_for.hasOwnProperty(name)) {
+				this.store.looking_for[name] = []
+				debugger
+			}
+			lo(this.store.looking_for)
+			debugger
+			if (checked) {
+				if (!this.store.looking_for[name].includes(index)) {
+					this.store.looking_for[name].push(index)
+				}
+			} else {
+				let i = this.store.looking_for[name].indexOf(index)
+				this.store.looking_for[name].splice(i, 1)
+			}
 		}
 	},
 	computed: {
@@ -206,17 +227,17 @@ export default defineComponent({
 			let is_anything_set = false
 
 			if (this.name in store.looking_for) {
-				for (const key in store.looking_for[this.name]) {
-					options[key].selected = true
+				for (const code of store.looking_for[this.name]) {
+					options[code].selected = true
 					is_anything_set	= true
 				}
 			}
 
 			if (is_anything_set) {
 				text += ': '
-				const _options = Object.entries(options)
-				const length = _options.length;
-				_options.forEach(([key, value], index) => {
+				debugger
+				const length = store.looking_for[this.name].length;
+				store.looking_for[this.name].forEach(([key, value], index) => {
 					text += value.text
 					if (index !== length - 1) {
 						text += ', '
