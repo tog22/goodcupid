@@ -89,12 +89,12 @@ const loaded = ref(false)
 const store = inject("store").state
 const uid = store.user.uid
 
-const get_url = '/records/messages/?filter=to,eq,'+uid
+const get_url = '/records/messages/?filter=to,eq,'+uid+'&exclude=message'
 api.get(get_url).then((response) => {
 	for (let key in response) {
-		this[key] = response[key]
+		messages.value.push(response[key])
 	}
-	loaded = true
+	loaded.value = true
 })
 
 

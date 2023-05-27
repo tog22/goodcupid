@@ -30,6 +30,11 @@ const router = createRouter({
 			component: () => import('../pages/Search.vue')
 		},
 		{
+			path: '/inbox',
+			name: 'inbox',
+			component: () => import('../pages/Inbox.vue')
+		},
+		{
 			path: '/message',
 			name: 'message',
 			component: () => import('../pages/Search.vue')

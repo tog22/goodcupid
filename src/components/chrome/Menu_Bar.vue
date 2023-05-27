@@ -10,7 +10,7 @@
 					<router-link to="/search">
 						Search
 					</router-link>
-					<router-link to="/message">
+					<router-link to="/inbox">
 						Message
 					</router-link>
 					<router-link to="/profile">
