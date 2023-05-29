@@ -1,11 +1,16 @@
 <template>
-	<form id="age_inner" @submit.prevent="submit" @keydown.enter="submit">
-		From
-		<input type="text" name="min_age" v-model="min" />
-		to
-		<input type="text" name="max_age" v-model="max"  />
-		<input type="submit" class="hide" />
-	</form>
+	<div class="s_content">
+		<form id="age_inner" @submit.prevent="submit" @keydown.enter="submit">
+			From
+			<input type="text" name="min_age" v-model="min" />
+			to
+			<input type="text" name="max_age" v-model="max"  />
+			<input type="submit" class="hide" />
+		</form>
+	</div>
+	<div class="close" @click="submit">
+		×
+	</div>
 </template>
 
 

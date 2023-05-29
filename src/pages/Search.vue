@@ -35,7 +35,7 @@
 *******************/
 
 // External libraries
-import { defineComponent, inject, watch, markRaw } from 'vue'
+import { defineComponent, inject, toRaw, markRaw } from 'vue'
 
 // Auxiliaries
 import api from '@/auxiliaries/api'
@@ -71,17 +71,42 @@ export default defineComponent({
 		},
 		build_search() {
 			this.search_params = {}
+			console.log(this.lf,'lf')
+			let filt_num = 1
 			for (let key in this.lf) {
-				if ('filter' in this.lf[key]) {
-					this.search_params[key] = this.lf[key].filter
-				} else if ('min' in this.lf[key] && 'max' in this.lf[key]) {
-					this.search_params[key] = 'filter='+key+',ge,'+this.lf[key].min+'&'
-					this.search_params[key] += 'filter='+key+',le,'+this.lf[key].max
-				} else if ('min' in this.lf[key]) {
-					this.search_params[key] = 'filter='+key+',ge,'+this.lf[key].min
-				} else if ('max' in this.lf[key]) {
-					this.search_params[key] = 'filter='+key+',le,'+this.lf[key].max
+				const filt = toRaw(this.lf[key])
+				// let prefix = 'filter'+filt_num+'='
+				let prefix = 'filter='
+				if ('filt' in filt) {
+					this.search_params[key] = '';
+					const length = filt.filt.length
+					filt.filt.forEach((f, i) => {
+						this.search_params[key] += prefix+f
+						if (i < length-1) {
+							this.search_params[key] += '&'
+						}
+					})
+				} else if ('min' in filt && 'max' in filt) {
+					this.search_params[key] = prefix+key+',ge,'+filt.min+'&'
+					this.search_params[key] += prefix+key+',le,'+filt.max
+				} else if ('min' in filt) {
+					this.search_params[key] = prefix+key+',ge,'+filt.min
+				} else if ('max' in filt) {
+					this.search_params[key] = prefix+key+',le,'+filt.max
+				} else if (Array.isArray(filt)) {
+					if (filt.length > 0) {
+						this.search_params[key] = prefix+key+',in,'+filt.join(',')
+					}
+					/* filt.forEach((f, i) => {
+						this.search_params[key] = prefix+key+',eq,'+f
+						if (i < filt.length-1) {
+							this.search_params[key] += '&'
+						}
+						filt_num++
+						// prefix = 'filt'+filt_num+'='
+					}) */
 				}
+				// filt_num++
 			}
 			lo('search_params = ')
 			console.log(this.search_params)
@@ -94,6 +119,7 @@ export default defineComponent({
 				get_url += this.search_params[key]+'&'
 			}
 			get_url = get_url.slice(0, -1)
+			lo('https://gc6.philosofiles.com/api'+get_url)
 			api.get(get_url).then((response) => {
 				console.log(response)
 				for (const profile_found of response.records ) {

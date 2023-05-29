@@ -1,8 +1,13 @@
 <template>
-	<form @submit.prevent="submit" @keydown.enter="submit">
-		At least <input type="text" name="min_height" v-model="min" />cm
-		<input type="submit" class="hide" />
-	</form>
+	<div class="s_content">
+		<form @submit.prevent="submit" @keydown.enter="submit">
+			At least <input type="text" name="min_height" v-model="min" />cm
+			<input type="submit" class="hide" />
+		</form>
+	</div>
+	<div class="close" @click="submit">
+		×
+	</div>
 </template>
 
 

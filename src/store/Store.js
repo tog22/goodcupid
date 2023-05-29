@@ -14,7 +14,10 @@ const default_state = {
 		who:			{
 			key:			'mlw',
 			text:			'Men <span class="s_light">who like women</span>',
-			filter:			'filter=gender,eq,m&filter=looking_for,cs,w',
+			filt:			[
+				'gender,eq,m',
+				'looking_for,cs,w'
+			]
 		},
 		age:			{
 			min:	26,
