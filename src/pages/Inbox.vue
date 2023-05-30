@@ -4,7 +4,7 @@
 			Loading...
 		</div>
 		<div id="content_zone">
-			<h1>
+			<h1 id="page_title">
 				Messages
 			</h1>
 		</div>
@@ -83,19 +83,73 @@ import api from '@/auxiliaries/api'
 **   *️⃣ MAIN CODE   **
 *********************/
 
-let messages = ref([])
-
+let received_loaded = ref([])
+let received = []
+let sent_loaded = ref([])
+let sent = []
 const loaded = ref(false)
 const store = inject("store").state
 const uid = store.user.uid
 
-const get_url = '/records/messages/?filter=to_pid,eq,'+uid+'&exclude=message'
-api.get(get_url).then((response) => {
-	for (let key in response) {
-		messages.value.push(response[key])
+const get_url_for_received = '/records/messages/?join=profiles&filter=to_pid,eq,'+uid+'&exclude=message'
+console.log('https://gc6.philosofiles.com/api'+get_url_for_received)
+api.get(get_url_for_received).then((response) => {
+	
+	if (!response.hasOwnProperty('records')) {
+		return
+	}
+
+	for (const message of response.records) {
+		if (message)
 	}
 	loaded.value = true
 })
 
+/*******************
+**	🛠 FUNCTIONS  **
+*******************/
+
+function lo(to_log) {
+	console.log(to_log)
+}
+
 
 </script>
+
+<style>
+
+h1#page_title {
+	margin-top: 0;
+}
+
+#inbox_page h1#page_title {
+	margin-bottom: 10px;
+}
+
+.tabs {
+  display: flex;
+}
+
+a.tab {
+  padding: 0.6em 1em 0.3em;
+  margin-right: 0.8em;
+  cursor: pointer;
+  /* flex: 1; */
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #ccc;
+  border-bottom: 3px solid #ccc;
+}
+
+a.tab.active {
+  color: #aaa;
+  border-bottom-color: #aaa;
+}
+
+.message_list {
+	margin: 2em 0;
+}
+
+
+</style>
