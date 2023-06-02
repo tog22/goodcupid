@@ -38,12 +38,7 @@ export default defineComponent({
 		let store_state = store.state
 		
 		// For now, auto-login
-		const get_url = '/records/profiles/1'
-		api.get(get_url).then((response) => {
-			response.pics = JSON.parse(response.pics)
-			response.pic = response.pics[0]
-			store_state.user_profile = response
-		})
+		
 	}
 })
 

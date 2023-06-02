@@ -18,7 +18,7 @@
 					<div v-if="is_user">
 						<router-link to="/edit">Edit profile</router-link>
 						|
-						<a href="#">
+						<a @click="fn.logout">
 							Log out
 						</a>
 					</div>
@@ -81,6 +81,11 @@
 	</div>
 </template>
 
+<script setup>
+import fn from '@/auxiliaries/Functions'
+
+</script>
+
 <script>
 /*******************
 **   ⤵️ IMPORTS   **
@@ -117,6 +122,9 @@ export default defineComponent({
 			})
 		}
 
+
+	},
+	methods: {
 
 	},
 	data() {
