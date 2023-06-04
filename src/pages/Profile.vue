@@ -135,9 +135,13 @@ export default defineComponent({
 		data.store = inject("store").state
 
 		if (typeof(this.$route.params.id) == "undefined") {
-			data.is_user = true
-			data = { ...data, ...data.store.user_profile }
-			data.loaded = true
+			if (Object.keys(data.store.user_profile).length == 0) {
+				this.$router.push('/login')
+			} else {
+				data.is_user = true
+				data = { ...data, ...data.store.user_profile }
+				data.loaded = true
+			}	
 		}
 
 		return data
