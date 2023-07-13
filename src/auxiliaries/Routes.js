@@ -35,9 +35,9 @@ const router = createRouter({
 			component: () => import('../pages/Inbox.vue')
 		},
 		{
-			path: '/message',
-			name: 'message',
-			component: () => import('../pages/Search.vue')
+			path: '/messages/:id',
+			name: 'messages',
+			component: () => import('../pages/Message_Thread.vue')
 		},
 		{
 			path: '/settings',

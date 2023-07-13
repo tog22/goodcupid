@@ -22,40 +22,16 @@
 				</a> -->
 			</div>
 			<div class="message_list">
-				<div class="message" v-for="(message, index) in received" :key="'m'+index">
-					<div class="message_top">
-						<div class="message_left">
-							<div class="message_from">
-								From: {{ message.name }}
-							</div>
-							<div class="message_to">
-								To: {{ message.to }}
-							</div>
-						</div>
-						<div class="message_right">
-							<div class="message_date">
-								{{ message.date }}
-							</div>
-						</div>
+				<div class="message" v-for="(message, index) in received" :key="'m'+index" @click="$router.push('/messages/'+message.id)">
+					<div class="profile_pic">
+						<img :src="'/images/profile_pics/'+message.pic" />
 					</div>
-					<div class="message_middle">
-						<div class="message_subject">
-							{{ message.subject }}
+					<div class="s_content">
+						<div class="from">
+							{{ message.name }}
 						</div>
-						<div class="message_body">
+						<div class="body">
 							{{ message.body }}
-						</div>
-					</div>
-					<div class="message_bottom">
-						<div class="message_left">
-							<div class="message_reply">
-								Reply
-							</div>
-						</div>
-						<div class="message_right">
-							<div class="message_delete">
-								Delete
-							</div>
 						</div>
 					</div>
 				</div>
@@ -113,8 +89,11 @@ function load_messages(direction, result) {
 				continue
 			} // else...
 
+			message[other].pics = JSON.parse(message[other].pics)
 			messages[message[other].pid] = {
-				name:		message.from_pid.name,
+				name:		message[other].name,
+				pic:		message[other].pics[0],
+				id:			message[other].pid,
 				to:			message.to_pid,
 				subject:	message.subject,
 				date:		message.date,
