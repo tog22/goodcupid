@@ -16,6 +16,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 // Auxiliaries
 import api from '@/auxiliaries/api'
+import fn from '@/auxiliaries/Functions'
 import store from '@/store/Store'
 
 // Components
@@ -38,7 +39,7 @@ export default defineComponent({
 		let store_state = store.state
 		
 		// For now, auto-login
-		
+		fn.login(1)
 	}
 })
 

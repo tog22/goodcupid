@@ -26,7 +26,7 @@
 					<div class="message_top">
 						<div class="message_left">
 							<div class="message_from">
-								From: {{ message.from }}
+								From: {{ message.name }}
 							</div>
 							<div class="message_to">
 								To: {{ message.to }}
@@ -114,12 +114,14 @@ function load_messages(direction, result) {
 			} // else...
 
 			messages[message[other].pid] = {
-				name:		message.from_pid,
+				name:		message.from_pid.name,
 				to:			message.to_pid,
 				subject:	message.subject,
 				date:		message.date,
 				body:		message.message
 			}
+
+			lo(messages[message[other].pid])
 
 		}
 
