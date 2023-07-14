@@ -93,11 +93,19 @@ function lo(to_log) {
 #person {
 	display: flex;
 	align-items: center;
+	margin-bottom: 2em;
 }
 
 .name {
 	font-size: 2em;
 	font-weight: bold;
+}
+
+.message .s_content {
+	background-color: white;
+	padding: 0.5em;
+	border-radius: 0.5em;
+	margin-bottom: 1em;
 }
 
 
