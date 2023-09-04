@@ -369,9 +369,9 @@ section h2 {
 
 
 
-/***************
-**  MESSAGES  **
-***************/
+/********************
+**  MESSAGE LISTS  **
+********************/
 
 .message_list .message {
 	display: flex;
@@ -387,4 +387,13 @@ section h2 {
 .message_list .from {
 	font-weight: bold;
 	font-size: 1.14em;
+}
+
+
+/**********************
+**  MESSAGE THREADS  **
+**********************/
+
+.message.user .s_content {
+	color: var(--light-grey);
 }

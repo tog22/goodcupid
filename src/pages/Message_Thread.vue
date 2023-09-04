@@ -4,14 +4,14 @@
 			Loading...
 		</div>
 		<div id="content_zone" v-else>
-			<div id="person">
+			<!-- <div id="person">
 				<div class="profile_pic">
 					<img :src="'/images/profile_pics/'+profile.pic" />
 				</div>
 				<div class="name">
 					{{ profile.name }}
 				</div>
-			</div>
+			</div> -->
 			<div id="messages">
 				<div class="message" :class="message.sender" v-for="(message, index) in messages" :key="'m'+index">
 					<div class="s_content">
@@ -19,6 +19,10 @@
 					</div>
 				</div>
 			</div>
+			<form id="reply" @submit.prevent="submit" @keydown.enter="submit">
+				<textarea name="reply_text" v-model="reply_text"></textarea>
+				<input type="submit" value="Send" class="hide" />
+			</form>
 		</div>
 	</div>
 </template>
@@ -107,6 +111,43 @@ function lo(to_log) {
 	border-radius: 0.5em;
 	margin-bottom: 1em;
 }
+
+/* 
+VERSION WITH SEND BUTTON ON RIGHT:
+#reply {
+	display: flex;
+}
+
+#reply textarea {
+	resize: none;
+	border-right: none;
+	border-radius: 0.5em 0 0 0.5em;
+	border-color: transparent;
+}
+
+#reply input[type="submit"] {
+	border-width: none;
+	border-color: transparent;
+	border-radius: 0 0.5em 0.5em 0;
+	background-color: var(--blue);
+	color: white;
+	font-weight: bold;
+}
+*/
+
+/*
+VERSION WITH SEND BUTTON BELOW: */
+
+#reply textarea {
+	width: 100%;
+	display: block;
+	border: none;
+	border-radius: 0.5em;
+}
+
+#reply input[type="submit"] {
+	margin-top: 1em;
+} 
 
 
 </style>
